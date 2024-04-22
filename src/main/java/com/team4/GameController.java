@@ -39,6 +39,9 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
           moved = true;
         } else {
           tower.setSelected(false);
+          if (tower.getDisksOnTower().contains(GameData.getInstance().getSelectedDisk())) {
+            tower.getDisksOnTower().remove(GameData.getInstance().getSelectedDisk());
+          }
         }
       }
 

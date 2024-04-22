@@ -24,6 +24,7 @@ public class GameData extends PropertyChangeSupport {
   private List<Tower> towers;
   private Disk selectedDisk = null;
   private int mouseYOffset = 0;
+  private Solver solver;
 
   private GameData(int nDisks) {
     super(new Object());
@@ -31,6 +32,7 @@ public class GameData extends PropertyChangeSupport {
     towers = new ArrayList<>();
     disks = new ArrayList<>();
     this.recalculate();
+    this.solver = new Solver();
   }
 
   public void recalculate () {
@@ -110,4 +112,15 @@ public class GameData extends PropertyChangeSupport {
   public void repaint() {
     firePropertyChange("repaint", null, null);
   }
+
+  public void solveGame() {
+    // Re-use the same solver instance to solve the game
+    solver.getMoves().clear(); // Clear previous moves
+//    solver.hanoi(towers.get(0), towers[2], towers[1].getID(), towers[0].getDisks().size());
+  }
+
+  public Solver getSolver() { // Getter for the solver
+    return solver;
+  }
+
 }

@@ -24,9 +24,13 @@ class Tower {
   }
 
   public void dropDisk(Disk disk) {
-    disk.setDiskX(x - disk.getWidth() / 2);
-    disk.setDiskY(y - (disksOnTower.size() + 1) * 20);
-    disksOnTower.add(disk);
+    if (!disksOnTower.contains(disk)) {
+      disk.setDiskX(x - disk.getWidth() / 2);
+      int baseY = y - 20;
+      int height = 20;
+      disk.setDiskY(baseY - (disksOnTower.size()) * height);
+      disksOnTower.add(disk);
+    }
   }
 
   public void draw(Graphics g) {
@@ -57,5 +61,10 @@ class Tower {
   public int getY() {
     return y;
   }
+
+  public List<Disk> getDisksOnTower() {
+    return disksOnTower;
+  }
+
 
 }
