@@ -3,32 +3,75 @@ package com.team4;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * The main class for the Towers of Hanoi game.
- * It extends creates a new TowerPanel object to display the game.
- * Define number of disks and window size.
- *
- * @author Jonathan Jara
- */
+public class GameMain extends JFrame {
+    private MenuPanel menuPanel;
+    private TowerPanel towerPanel;
+    private ChatPanel chatPanel;
 
- public class GameMain extends JFrame {
-     public GameMain(){
-         TowerPanel towerPanel = new TowerPanel();
-         ChatPanel chatPanel = new ChatPanel();
 
-         this.setLayout(new GridLayout(1,2));
-         this.add(towerPanel);
-         this.add(chatPanel);
+    public GameMain() {
+        setTitle("Towers of Hanoi");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1920, 1080);
 
-         GameController controller = new GameController();
-         towerPanel.addMouseListener(controller);
-         towerPanel.addMouseMotionListener(controller);
-         towerPanel.addComponentListener(controller);
+        // Initialize components
+        menuPanel = new MenuPanel();
+        towerPanel = new TowerPanel();
+        chatPanel = new ChatPanel();
 
-         GameData.getInstance().setnDisks(3);
-         GameData.getInstance().setSize(this.getWidth(), this.getHeight());
-         GameData.getInstance().addPropertyChangeListener(towerPanel);
-     }
+        // Set layout
+        setLayout(new BorderLayout());
+
+        // Add main menu panel initially
+        add(menuPanel, BorderLayout.CENTER);
+
+    /*
+    // Add tower panel and other components
+    JPanel rightPanel = new JPanel();
+    rightPanel.setLayout(new GridLayout(2, 1));
+    rightPanel.add(towerPanel);
+    JPanel bottomPanel = new JPanel();
+    bottomPanel.setLayout(new GridLayout(1, 2));
+    bottomPanel.add(weatherPanel);
+    bottomPanel.add(mapPanel);
+    rightPanel.add(bottomPanel);
+    add(chatPanel, BorderLayout.WEST);
+    add(rightPanel, BorderLayout.EAST);
+     */
+
+        // Set up game controller and data
+        GameController controller = new GameController();
+        towerPanel.addMouseListener(controller);
+        towerPanel.addMouseMotionListener(controller);
+        towerPanel.addComponentListener(controller);
+        GameData.getInstance().setnDisks(4);
+        GameData.getInstance().setSize(getWidth(), getHeight());
+        GameData.getInstance().addPropertyChangeListener(towerPanel);
+    }
+
+    public void startGame() {
+        // Remove main menu panel
+        remove(menuPanel);
+
+        // Add other panels
+        JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(new GridLayout(2, 1));
+        rightPanel.add(towerPanel);
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new GridLayout(1, 2));
+
+        rightPanel.add(bottomPanel);
+
+        // Add chat panel to the left
+        add(chatPanel, BorderLayout.WEST);
+
+        // Add right panel to the center
+        add(rightPanel, BorderLayout.CENTER);
+
+        // Revalidate and repaint
+        revalidate();
+        repaint();
+    }
         public static void main(String[] args) {
             GameMain main = new GameMain();
             main.setTitle("Towers of Hanoi");
