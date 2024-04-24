@@ -72,6 +72,14 @@ public class GameMain extends JFrame {
         revalidate();
         repaint();
     }
+
+    public void other(){
+        System.out.println("Other gamemode");
+    }
+
+    public void help(){
+        System.out.println("HELPPPP");
+    }
         public static void main(String[] args) {
             GameMain main = new GameMain();
             main.setTitle("Towers of Hanoi");
