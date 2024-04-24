@@ -83,7 +83,7 @@ public class GameMain extends JFrame {
         public static void main(String[] args) {
             GameMain main = new GameMain();
             main.setTitle("Towers of Hanoi");
-            main.setSize(800, 400);
+            main.setSize(1200, 800);
             main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             main.setVisible(true);
         }
