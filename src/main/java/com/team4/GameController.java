@@ -31,7 +31,6 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
   public void mouseReleased(MouseEvent e) {
     boolean moved = false;
     if (GameData.getInstance().getSelectedDisk() != null) {
-
       for (Tower tower : GameData.getInstance().getTowers()) {
         if (tower.contains(e.getX(), e.getY())) {
           tower.dropDisk(GameData.getInstance().getSelectedDisk());
@@ -39,6 +38,9 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
           moved = true;
         } else {
           tower.setSelected(false);
+          if (tower.getDisksOnTower().contains(GameData.getInstance().getSelectedDisk())) {
+            tower.getDisksOnTower().remove(GameData.getInstance().getSelectedDisk());
+          }
         }
       }
 
@@ -50,6 +52,7 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
       GameData.getInstance().repaint();
     }
   }
+
 
   public void mouseDragged(MouseEvent e) {
     if (GameData.getInstance().getSelectedDisk() != null) {

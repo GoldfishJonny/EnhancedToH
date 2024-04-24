@@ -44,7 +44,7 @@ public class GameMain extends JFrame {
         towerPanel.addMouseListener(controller);
         towerPanel.addMouseMotionListener(controller);
         towerPanel.addComponentListener(controller);
-        GameData.getInstance().setnDisks(4);
+        GameData.getInstance().setnDisks(3);
         GameData.getInstance().setSize(getWidth(), getHeight());
         GameData.getInstance().addPropertyChangeListener(towerPanel);
     }

@@ -22,12 +22,21 @@ class Tower {
     this.y = y;
     this.disksOnTower = new ArrayList<>();
   }
+  public List<Disk> getDisksOnTower() {
+    return disksOnTower;
+  }
+
 
   public void dropDisk(Disk disk) {
-    disk.setDiskX(x - disk.getWidth() / 2);
-    disk.setDiskY(y - (disksOnTower.size() + 1) * 20);
-    disksOnTower.add(disk);
+    if (!disksOnTower.contains(disk)) {
+      disk.setDiskX(x - disk.getWidth() / 2);
+      int baseY = y - 20; // y-coordinate for the bottom-most disk
+      int height = 20; // height of a disk
+      disk.setDiskY(baseY - disksOnTower.size() * height);
+      disksOnTower.add(disk);
+    }
   }
+
 
   public void draw(Graphics g) {
     int width = 10;
