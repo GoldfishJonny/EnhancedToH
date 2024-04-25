@@ -4,7 +4,6 @@ import com.javiergs.Tower;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class NewTower {
     private int x;

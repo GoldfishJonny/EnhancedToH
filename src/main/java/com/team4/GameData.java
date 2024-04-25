@@ -14,11 +14,14 @@ public class GameData extends PropertyChangeSupport {
     private List<NewTower> towers;
     private NewDisk selectedDisk = null;
     private int mouseYOffset = 0;
+    private Tutor tutor;
+    private long bestTime = 0;
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
         towers = new ArrayList<>();
         disks = new ArrayList<>();
+        tutor = new Tutor();
         this.recalculate();
     }
 
@@ -28,6 +31,7 @@ public class GameData extends PropertyChangeSupport {
         }
         towers.clear();
         disks.clear();
+        System.out.println(windowHeight + " " + windowsWidth);
         int towerWidth = windowsWidth / 4 - 20;
         for (int i = 0; i < 3; i++) {
             int x = windowsWidth / 4 * (i + 1);
@@ -93,4 +97,23 @@ public class GameData extends PropertyChangeSupport {
     public void setMouseYOffset(int mouseYOffset) {
         this.mouseYOffset = mouseYOffset;
     }
+
+    public Tutor getTutor(){
+        return tutor;
+    }
+
+    public String formatElapsedTime(long bestTime) {
+        long minutes = bestTime / 60000;
+        long seconds = (bestTime % 60000) / 1000;
+        long milliseconds = bestTime % 1000;
+        return String.format("%02d:%02d:%03d", minutes, seconds, milliseconds);
+    }
+
+    public void changeBestTime(long time) {
+        if (bestTime == 0 || time < bestTime) {
+            bestTime = time;
+            firePropertyChange("bestTime", null, bestTime);
+        }
+    }
+
 }
