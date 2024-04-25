@@ -14,7 +14,7 @@ public class MenuPanel extends JPanel {
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Call the startGame method in GameMain when the start button is clicked
-                ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).startGame();
+//                ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).startGame();
             }
         });
 

@@ -14,22 +14,20 @@ import java.awt.*;
  public class GameMain extends JFrame {
      public GameMain(){
          TowerPanel towerPanel = new TowerPanel();
-         ChatPanel chatPanel = new ChatPanel();
-         TutorPanel tutorPanel = new TutorPanel();
          JPanel rightPanel = new JPanel();
 
          this.setLayout(new GridLayout(1,2));
          rightPanel.setLayout(new GridLayout(2,1));
-         rightPanel.add(tutorPanel);
-         rightPanel.add(chatPanel);
+//         rightPanel.add(tutorPanel);
+//         rightPanel.add(chatPanel);
          this.add(towerPanel);
          this.add(rightPanel);
-
+//
          GameController controller = new GameController();
          towerPanel.addMouseListener(controller);
          towerPanel.addMouseMotionListener(controller);
          towerPanel.addComponentListener(controller);
-
+//
          GameData.getInstance().setnDisks(3);
          GameData.getInstance().setSize(this.getWidth(), this.getHeight());
          GameData.getInstance().addPropertyChangeListener(towerPanel);
