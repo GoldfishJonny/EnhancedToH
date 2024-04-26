@@ -37,6 +37,8 @@ public class MenuPanel extends JPanel {
         startButton = new JButton("Timer");
         startButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the button horizontally
         startButton.setBackground(Color.RED);
+        startButton.setForeground(Color.WHITE);
+        startButton.setFont(new Font("Arial", Font.BOLD, 15));
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).startGame();
@@ -48,6 +50,10 @@ public class MenuPanel extends JPanel {
 
         otherButton = new JButton("Stop Watch");
         otherButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the button horizontally
+        otherButton.setBackground(Color.BLUE);
+        otherButton.setForeground(Color.WHITE); // Set the text color to white
+        otherButton.setFont(new Font("Arial", Font.BOLD, 15));
+
         otherButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).other();
@@ -58,6 +64,9 @@ public class MenuPanel extends JPanel {
 
         helpButton = new JButton("Help");
         helpButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the button horizontally
+        helpButton.setBackground(Color.GREEN);
+        helpButton.setForeground(Color.WHITE);
+        helpButton.setFont(new Font("Arial", Font.BOLD, 15));
         helpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).help();
