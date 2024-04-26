@@ -186,6 +186,7 @@ public class GameData extends PropertyChangeSupport {
         moves = 0;
         counter = 0;
         gameOver = 0;
+        this.progressPanel.resetProgress();
         firePropertyChange("moves", null, moves);
         firePropertyChange("counter", null, counter);
         firePropertyChange("gameOver", null, 1);
