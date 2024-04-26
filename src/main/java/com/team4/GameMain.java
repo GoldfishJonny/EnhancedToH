@@ -1,9 +1,6 @@
 package com.team4;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * The main class for the Towers of Hanoi game.
@@ -20,6 +17,7 @@ import java.awt.event.ActionListener;
     private TutorPanel tutorPanel;
      private TimeTrialPanel timeTrial = new TimeTrialPanel(new TimeTrial());
     public GameMain(){
+        this.setBackground(Color.WHITE);
         navbarPanel = new NavbarPanel();
         towerPanel = new TowerPanel();
         tutorPanel = new TutorPanel();
@@ -51,14 +49,15 @@ import java.awt.event.ActionListener;
         JPanel rightPanel = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel bottomPanel = new JPanel();
-
         this.setLayout(new BorderLayout());
         bottomPanel.setLayout(new GridLayout(1,2));
         rightPanel.setLayout(new GridLayout(2,1));
         leftPanel.setLayout(new GridLayout(2,1));
-
+        towerPanel.setBackground(Color.decode("#EFF7F6"));
+        leftPanel.setBackground(Color.decode("#EFF7F6"));
         leftPanel.add(towerPanel);
         leftPanel.add(timeTrial);
+
         rightPanel.add(tutorPanel);
         bottomPanel.add(leftPanel);
         bottomPanel.add(rightPanel);

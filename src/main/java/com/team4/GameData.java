@@ -4,6 +4,14 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+/**
+ * Game data for the Towers of Hanoi game.
+ * It contains the disks and towers, and recalculate their positions.
+ * It extends PropertyChangeSupport to notify observers of changes in the game data.
+ *
+ * Base code provided by Professor.
+ * @author Jonathan Jara
+ */
 
 public class GameData extends PropertyChangeSupport {
     private static GameData instance;
@@ -16,8 +24,9 @@ public class GameData extends PropertyChangeSupport {
     private int mouseYOffset = 0;
     private Tutor tutor;
     private long bestTime = 0;
-
     private int counter = 0;
+
+    private int moves = 0;
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
@@ -117,9 +126,33 @@ public class GameData extends PropertyChangeSupport {
             firePropertyChange("bestTime", null, bestTime);
         }
     }
-
-    public void start() {
+    public void setCounter(int counter) {
+        this.counter += counter;
         firePropertyChange("counter", null, counter);
     }
 
+    public void iterateMoves(){
+        moves++;
+        firePropertyChange("moves", null, moves);
+    }
+
+    public int getMoves(){
+        return moves;
+    }
+
+    public void setGameOver(boolean b) {
+        if (b) {
+            firePropertyChange("gameOver", null, 1);
+        }
+    }
+
+    public void restart() {
+        for (Tower tower : towers) {
+            tower.getDisksOnTower().clear();
+        }
+        recalculate();
+        moves = 0;
+        firePropertyChange("moves", null, moves);
+        firePropertyChange("gameOver", null, 0);
+    }
 }

@@ -2,6 +2,14 @@ package com.team4;
 import com.javiergs.Disk;
 
 import java.awt.*;
+/**
+ * A disk in the Towers of Hanoi game.
+ * It can be drawn, selected, deselected, and moved to a tower, and compared to other disks based on width.
+ *
+ * Base code provided by Professor.
+ * @Author Jonathan Jara
+ *
+ */
 
 public class NewDisk extends Disk{
     private int   diskX;
