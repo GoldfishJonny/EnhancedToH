@@ -15,12 +15,15 @@ import java.awt.*;
     private NavbarPanel navbarPanel;
     private TowerPanel towerPanel;
     private TutorPanel tutorPanel;
-     private TimeTrialPanel timeTrial = new TimeTrialPanel(new TimeTrial());
+    private TimeTrialPanel timeTrial = new TimeTrialPanel(new TimeTrial());
+    private ProgressPanel progressPanel;
+
     public GameMain(){
         this.setBackground(Color.WHITE);
         navbarPanel = new NavbarPanel();
         towerPanel = new TowerPanel();
         tutorPanel = new TutorPanel();
+        progressPanel = new ProgressPanel();
 
         setLayout(new BorderLayout());
         add(menuPanel, BorderLayout.CENTER);
@@ -72,6 +75,10 @@ import java.awt.*;
         GameData.getInstance().setnDisks(3);
         GameData.getInstance().setSize(this.getWidth(), this.getHeight());
         GameData.getInstance().addPropertyChangeListener(towerPanel);
+
+        ProgressPanel progressPanel = GameData.getInstance().getProgressPanel();
+        this.add(progressPanel, BorderLayout.NORTH);
+        System.out.println("ProgressPanel added to GameMain");
 
         // Revalidate and repaint
         revalidate();

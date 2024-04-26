@@ -16,6 +16,11 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
 
     private int initialX;
     private int initialY;
+    private ProgressPanel progressPanel;
+
+    public GameController() {
+        this.progressPanel = GameData.getInstance().getProgressPanel();
+    }
 
     public void mousePressed(MouseEvent e) {
         for (int i = GameData.getInstance().getNewDisks().size() - 1; i >= 0; i--) {
@@ -51,6 +56,18 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
                     if (GameData.getInstance().getNewTowers().get(2).getDisksOnTower().size() == GameData.getInstance().getnDisks()) {
                         GameData.getInstance().setGameOver(true);
                     }
+
+                    // Check if the disk was moved to a different tower
+//                    if (tower != oldTower) {
+//                        progressPanel.updateProgress(GameData.getInstance().getProgress());
+//                    }
+
+                    if (tower != oldTower) {
+                        System.out.println("Progress update triggered");
+                        progressPanel.updateProgress(GameData.getInstance().getProgress());
+                        System.out.println("Current progress: " + GameData.getInstance().getProgress());
+                    }
+
                 }
                 else {
                     System.out.println(initialY);

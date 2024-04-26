@@ -17,6 +17,7 @@ public class GameData extends PropertyChangeSupport {
     private static GameData instance;
     private int windowsWidth;
     private int windowHeight;
+    private ProgressPanel progressPanel;
     private int nDisks;
     private List<NewDisk> disks;
     private List<Tower> towers;
@@ -141,14 +142,33 @@ public class GameData extends PropertyChangeSupport {
     public void iterateMoves(){
         moves++;
         firePropertyChange("moves", null, moves);
+        System.out.println("Moves incremented: " + moves);
     }
 
     public int getMoves(){
         return moves;
     }
 
+    public int getProgress() {
+        // Calculate the total number of moves required to solve the Tower of Hanoi puzzle
+        int totalMoves = (int) Math.pow(2, getnDisks()) - 1;
+
+        // Calculate the current progress percentage
+        double progressPercentage = (double) getMoves() / totalMoves * 100;
+
+        // Ensure the progress percentage is within the range [0, 100]
+        return (int) Math.round(progressPercentage);
+    }
+
+
     public Solver getSolver() {
         return solver;
+    }
+    public ProgressPanel getProgressPanel() {
+        if (progressPanel == null) {
+            progressPanel = new ProgressPanel();
+        }
+        return progressPanel;
     }
 
     public void setGameOver(boolean b) {
