@@ -1,18 +1,16 @@
 package com.team4;
-import com.javiergs.Tower;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewTower {
+public class Tower {
     private int x;
     private int y;
     private boolean selected;
     private final List<NewDisk> disksOnTower;
     private int id;
 
-    public NewTower(int x, int y, int id) {
+    public Tower(int x, int y, int id) {
         this.x = x;
         this.y = y;
         this.id = id;

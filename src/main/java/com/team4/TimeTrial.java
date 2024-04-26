@@ -24,6 +24,7 @@ public class TimeTrial {
      * Starts the timer.
      */
     public void start() {
+        System.out.println(running);
         if (!running) {
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
@@ -33,6 +34,7 @@ public class TimeTrial {
             }, 0, 100); 
             running = true; 
         }
+        System.out.println(running);
     }
 
     /**
@@ -86,6 +88,7 @@ public class TimeTrial {
         long milliseconds = elapsedTime % 1000; 
         long seconds = (elapsedTime / 1000) % 60; // Extract seconds
         long minutes = (elapsedTime / (1000 * 60)) % 60; // Extract minutes
+        System.out.println(minutes + " " + seconds + " " + milliseconds);
         return String.format("%02d:%02d.%03d", minutes, seconds, milliseconds); // Format the time string
     }
 }

@@ -10,7 +10,7 @@ public class NewDisk extends Disk{
     private int  height;
     private Color color;
     private int weight;
-    private NewTower tower;
+    private Tower tower;
     public NewDisk(int x, int y, int width,int height, Color color, int weight) {
         super(x, y, width, color);
         this.diskX =x - width / 2;
@@ -48,7 +48,7 @@ public class NewDisk extends Disk{
 
     public int getWidth() { return width; }
 
-    public NewTower getTower() { return tower; }
+    public Tower getTower() { return tower; }
 
-    public void setTower(NewTower tower) { this.tower = tower; }
+    public void setTower(Tower tower) { this.tower = tower; }
 }

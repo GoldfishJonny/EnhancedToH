@@ -1,8 +1,3 @@
-/**
- * TimeTrialPanel represents a JPanel that displays the current time and the best time achieved.
- * It listens for changes in the best time and updates the display accordingly.
- * It also listens for when the game starts and when it ends, to start and stop the timer.
- */
 package com.team4;
 
 import javax.swing.*;
@@ -10,6 +5,11 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * TimeTrialPanel represents a JPanel that displays the current time and the best time achieved.
+ * It listens for changes in the best time and updates the display accordingly.
+ * It also listens for when the game starts and when it ends, to start and stop the timer.
+ */
 public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
     private TimeTrial timeTrial;
     private JLabel timeLabel;
@@ -92,6 +92,7 @@ public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
 
         if (evt.getPropertyName().equals("counter")) {
             int counter = (int) evt.getNewValue();
+            System.out.println(counter);
             if (counter == 1) {
                 timeTrial.restart();
             }

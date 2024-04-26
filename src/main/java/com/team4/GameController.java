@@ -27,14 +27,15 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
         boolean moved = false;
         if (GameData.getInstance().getSelectedDisk() != null) {
 
-            for (NewTower tower : GameData.getInstance().getNewTowers()) {
+            for (Tower tower : GameData.getInstance().getNewTowers()) {
                 if (tower.contains(e.getX(), e.getY()) && tower.canAddDisk(GameData.getInstance().getSelectedDisk())){
-                    NewTower oldTower = GameData.getInstance().getSelectedDisk().getTower();
+                    Tower oldTower = GameData.getInstance().getSelectedDisk().getTower();
                     oldTower.removeDisk(GameData.getInstance().getSelectedDisk());
                     tower.dropDisk(GameData.getInstance().getSelectedDisk());
                     GameData.getInstance().getSelectedDisk().setTower(tower);
                     tower.setSelected(true);
                     moved = true;
+                    GameData.getInstance().start();
                 }
                 else {
                     System.out.println(initialY);
@@ -53,7 +54,7 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
 
     public void mouseDragged(MouseEvent e) {
         if (GameData.getInstance().getSelectedDisk() != null) {
-            for (NewTower tower : GameData.getInstance().getNewTowers()) {
+            for (Tower tower : GameData.getInstance().getNewTowers()) {
                 if (tower.contains(e.getX(), e.getY())) {
                     tower.setSelected(true);
                 } else {

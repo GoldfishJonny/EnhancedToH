@@ -11,11 +11,13 @@ public class GameData extends PropertyChangeSupport {
     private int windowHeight;
     private int nDisks;
     private List<NewDisk> disks;
-    private List<NewTower> towers;
+    private List<Tower> towers;
     private NewDisk selectedDisk = null;
     private int mouseYOffset = 0;
     private Tutor tutor;
     private long bestTime = 0;
+
+    private int counter = 0;
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
@@ -31,14 +33,12 @@ public class GameData extends PropertyChangeSupport {
         }
         towers.clear();
         disks.clear();
-        System.out.println(windowHeight + " " + windowsWidth);
         int towerWidth = windowsWidth / 4 - 20;
         for (int i = 0; i < 3; i++) {
             int x = windowsWidth / 4 * (i + 1);
             int y = windowHeight - 50;
-            towers.add(new NewTower(x, y, i));
+            towers.add(new Tower(x, y, i));
         }
-        System.out.println(towers.size());
         Random random = new Random();
         for (int i = 0; i < nDisks; i++) {
             Color color = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
@@ -49,6 +49,7 @@ public class GameData extends PropertyChangeSupport {
             disks.get(i).setTower(towers.get(0));
             towers.get(0).setDisksOnTower(disks.get(i));
         }
+        repaint();
     }
 
     public static GameData getInstance() {
@@ -58,7 +59,7 @@ public class GameData extends PropertyChangeSupport {
         return instance;
     }
 
-    public List<NewTower> getNewTowers(){ return towers; }
+    public List<Tower> getNewTowers(){ return towers; }
 
     public List<NewDisk> getNewDisks(){ return disks; }
 
@@ -106,6 +107,7 @@ public class GameData extends PropertyChangeSupport {
         long minutes = bestTime / 60000;
         long seconds = (bestTime % 60000) / 1000;
         long milliseconds = bestTime % 1000;
+        System.out.println(minutes + " " + seconds + " " + milliseconds);
         return String.format("%02d:%02d:%03d", minutes, seconds, milliseconds);
     }
 
@@ -114,6 +116,10 @@ public class GameData extends PropertyChangeSupport {
             bestTime = time;
             firePropertyChange("bestTime", null, bestTime);
         }
+    }
+
+    public void start() {
+        firePropertyChange("counter", null, counter);
     }
 
 }
