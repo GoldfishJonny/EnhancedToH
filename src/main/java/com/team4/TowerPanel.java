@@ -1,7 +1,6 @@
 package com.team4;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +27,7 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
         }
 
         private void initializeComponents() {
-            setBackground(Color.WHITE);
+            setBackground(Color.decode("#EFF7F6"));
 
             restartButton = new JButton("Restart Game");
             restartButton.setBackground(Color.decode("#F7D6E0"));
@@ -42,7 +41,8 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
                 }
             });
 
-            this.add(restartButton, BorderLayout.NORTH);
+            this.add(restartButton, BorderLayout.CENTER);
+            repaint();
         }
     @Override
     public void propertyChange(PropertyChangeEvent evt) {

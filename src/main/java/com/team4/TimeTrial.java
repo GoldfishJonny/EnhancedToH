@@ -1,5 +1,6 @@
 /**
  * A simple class for measuring elapsed time.
+ * @ Author Fisher Lyon
  */
 package com.team4;
 
@@ -70,8 +71,7 @@ public class TimeTrial {
 
     /**
      * Sets the elapsed time to a desired quantity.
-     * 
-     * @param time
+     *
      */
     public void setElapsedTime(long time) {
         this.elapsedTime = time;

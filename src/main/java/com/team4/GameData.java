@@ -27,6 +27,8 @@ public class GameData extends PropertyChangeSupport {
     private int counter = 0;
 
     private int moves = 0;
+    private int gameOver = 0;
+    private Solver solver;
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
@@ -34,6 +36,7 @@ public class GameData extends PropertyChangeSupport {
         disks = new ArrayList<>();
         tutor = new Tutor();
         this.recalculate();
+        this.solver = new Solver();
     }
 
     public void recalculate () {
@@ -87,6 +90,10 @@ public class GameData extends PropertyChangeSupport {
         this.recalculate();
     }
 
+    public void solveGame(){
+        solver.getMoves().clear();
+        solver.hanoi(towers.get(0).getID(), towers.get(2).getID(), towers.get(1).getID(), towers.get(0).getDisksOnTower().size());
+    }
     public void repaint() {
         firePropertyChange("repaint", null, null);
     }
@@ -140,6 +147,10 @@ public class GameData extends PropertyChangeSupport {
         return moves;
     }
 
+    public Solver getSolver() {
+        return solver;
+    }
+
     public void setGameOver(boolean b) {
         if (b) {
             firePropertyChange("gameOver", null, 1);
@@ -151,8 +162,12 @@ public class GameData extends PropertyChangeSupport {
             tower.getDisksOnTower().clear();
         }
         recalculate();
+        solver = new Solver();
         moves = 0;
+        counter = 0;
+        gameOver = 0;
         firePropertyChange("moves", null, moves);
-        firePropertyChange("gameOver", null, 0);
+        firePropertyChange("counter", null, counter);
+        firePropertyChange("gameOver", null, 1);
     }
 }
