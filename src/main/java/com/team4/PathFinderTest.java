@@ -32,7 +32,7 @@ class PathFinderTest {
     }
 
     @Test
-    public void testGetPossibleMoves_MultipleDisksAndPegs() {
+    public void testGetPossibleMoves_MultipleDisks() {
         List<Stack<Integer>> state = new ArrayList<>();
         Stack<Integer> t1 = new Stack<>();
         Stack<Integer> t2 = new Stack<>();
@@ -47,8 +47,72 @@ class PathFinderTest {
 
         List<String> moves = PathFinder.getPossibleMoves(state);
         assertEquals(3, moves.size(), "There should be three possible moves.");
-        assertEquals("Move disk from tower 1 to tower 2", moves.get(0), "Check move from peg 1 to peg 3.");
-        assertEquals("Move disk from tower 1 to tower 3", moves.get(1), "Check move from peg 2 to peg 1.");
-        assertEquals("Move disk from tower 2 to tower 3", moves.get(2), "Check move from peg 2 to peg 3.");
+        assertEquals("Move disk from tower 1 to tower 2", moves.get(0), "1");
+        assertEquals("Move disk from tower 1 to tower 3", moves.get(1), "2");
+        assertEquals("Move disk from tower 2 to tower 3", moves.get(2), "3");
+    }
+
+    @Test
+    public void testGetPossibleMoves_RandomAssort1() {
+        List<Stack<Integer>> state = new ArrayList<>();
+        Stack<Integer> t1 = new Stack<>();
+        Stack<Integer> t2 = new Stack<>();
+        Stack<Integer> t3 = new Stack<>();
+        t1.push(3);
+        t1.push(1);
+        t2.push(2);
+        t3.push(4);
+        state.add(t1);
+        state.add(t2);
+        state.add(t3);
+
+        List<String> moves = PathFinder.getPossibleMoves(state);
+        assertEquals(3, moves.size(), "There should be three possible moves.");
+        assertEquals("Move disk from tower 1 to tower 2", moves.get(0), "1");
+        assertEquals("Move disk from tower 1 to tower 3", moves.get(1), "2");
+        assertEquals("Move disk from tower 2 to tower 3", moves.get(2), "3");
+    }
+
+    @Test
+    public void testGetPossibleMoves_RandomAssort2() {
+        List<Stack<Integer>> state = new ArrayList<>();
+        Stack<Integer> t1 = new Stack<>();
+        Stack<Integer> t2 = new Stack<>();
+        Stack<Integer> t3 = new Stack<>();
+        t1.push(3);
+        t2.push(1);
+        t2.push(2);
+        t3.push(4);
+        state.add(t1);
+        state.add(t2);
+        state.add(t3);
+
+        List<String> moves = PathFinder.getPossibleMoves(state);
+        assertEquals(3, moves.size(), "There should be three possible moves.");
+        assertEquals("Move disk from tower 1 to tower 3", moves.get(0), "1");
+        assertEquals("Move disk from tower 2 to tower 1", moves.get(1), "2");
+        assertEquals("Move disk from tower 2 to tower 3", moves.get(2), "3");
+    }
+
+    @Test
+    public void testGetPossibleMoves_RandomAssort3() {
+        List<Stack<Integer>> state = new ArrayList<>();
+        Stack<Integer> t1 = new Stack<>();
+        Stack<Integer> t2 = new Stack<>();
+        Stack<Integer> t3 = new Stack<>();
+        t2.push(5);
+        t2.push(4);
+        t3.push(3);
+        t3.push(2);
+        t3.push(1);
+        state.add(t1);
+        state.add(t2);
+        state.add(t3);
+
+        List<String> moves = PathFinder.getPossibleMoves(state);
+        assertEquals(3, moves.size(), "There should be three possible moves.");
+        assertEquals("Move disk from tower 2 to tower `3`", moves.get(0), "1");
+        assertEquals("Move disk from tower 3 to tower 1", moves.get(1), "2");
+        assertEquals("Move disk from tower 3 to tower 1", moves.get(2), "3");
     }
 }
