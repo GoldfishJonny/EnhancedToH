@@ -47,8 +47,8 @@ class PathFinderTest {
 
         List<String> moves = PathFinder.getPossibleMoves(state);
         assertEquals(3, moves.size(), "There should be three possible moves.");
-        assertEquals("Move disk from tower 1 to tower 3", moves.get(0), "Check move from peg 1 to peg 3.");
-        assertEquals("Move disk from tower 2 to tower 1", moves.get(1), "Check move from peg 2 to peg 1.");
+        assertEquals("Move disk from tower 1 to tower 2", moves.get(0), "Check move from peg 1 to peg 3.");
+        assertEquals("Move disk from tower 1 to tower 3", moves.get(1), "Check move from peg 2 to peg 1.");
         assertEquals("Move disk from tower 2 to tower 3", moves.get(2), "Check move from peg 2 to peg 3.");
     }
 }
