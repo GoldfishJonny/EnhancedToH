@@ -1,41 +1,91 @@
 package com.team4;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Solver {
-    private List<String> moves; // List to store move instructions
+//    private List<int[]> moves; // List to store move instructions
+
+    // Disk & Tower
+    private int[] disks;
+
+    private List<int[]> moves = new ArrayList<>();
+
     private int currentMoveIndex = 0; //track the current move
 
     public Solver() {
         this.moves = new ArrayList<>(); // Initialize the moves list
     }
 
-    public void hanoi(int from, int to, int buf, int nmv) {
-        if (nmv > 0) {
-            hanoi(from, buf, to, nmv-1);
-            moves.add("Move disk " + nmv + " from Tower " + (from + 1) + " to Tower " + (to + 1));
-            hanoi(buf, to, from, nmv-1);
+    public static void moveDisks(int[] diskPositions, int disksToMove, int targetPeg, List<int[]> answer)
+    {
+        for (int badDisk = disksToMove-1; badDisk >= 0; --badDisk) {
+            int currentPeg = diskPositions[badDisk];
+            if (currentPeg != targetPeg) {
+                // found the largest disk on the wrong peg
+
+                // sum of the peg numbers is 3, so to find the other one:
+                int otherPeg = 3 - targetPeg - currentPeg;
+
+                // before we can move badDisk, we have to get the smaller
+                // ones out of the way
+                moveDisks(diskPositions, badDisk, otherPeg, answer);
+
+                // Move
+                diskPositions[badDisk] = targetPeg;
+                System.out.println(
+                        "Move " + badDisk + " from " + currentPeg + " to " + targetPeg
+                );
+                int[] disks = new int[diskPositions.length];
+                for (int i = 0; i < diskPositions.length; i++) {
+                    disks[i] = diskPositions[i];
+                }
+                answer.add(disks);
+//                answer[badDisk] = targetPeg;
+
+                //Now we can put the smaller ones in the right place
+                moveDisks(diskPositions, badDisk, targetPeg, answer);
+                break;
+            }
         }
     }
 
-    public List<String> getMoves() {
+//    public void hanoi(int from, int to, int buf, int nmv) {
+//        if (nmv > 0) {
+//            hanoi(from, buf, to, nmv - 1);
+//            moves.add(new int[]{from+1, to+1, nmv}); // Add move as an int array
+//            hanoi(buf, to, from, nmv - 1);
+//        }
+//    }
+//
+//    public List<int[]> getMoves() {
+//        return moves;
+//    }
+
+    public List<int[]> solve(int[] n, int num){
+        moves.clear();
+        moveDisks(n, num, 2, moves);
         return moves;
     }
 
 
+
+
     // Method to get the next move and increment the move index
-    public String getNextMove() {
-        if (currentMoveIndex < moves.size()) {
-            String move = moves.get(currentMoveIndex);
-            currentMoveIndex++; // Move to the next index
-            return move;
-        } else {
-            return "Congratulations, you completed the towers!"; // When all moves have been shown
-        }
-    }
-    public void resetMoves() {
-        currentMoveIndex = 0; // Reset the current move index to 0, reset works
-    }
+//    public String getNextMove() {
+//        if (currentMoveIndex < moves.size()) {
+//            String move = Arrays.toString(moves.get(currentMoveIndex));
+//            currentMoveIndex++; // Move to the next index
+//            return move;
+//        } else {
+//            return "Congratulations, you completed the towers!"; // When all moves have been shown
+//        }
+//    }
+//    public void resetMoves() {
+//        currentMoveIndex = 0; // Reset the current move index to 0, reset works
+//    }
     // maybe a method that just figures out the next move only?
+
 }

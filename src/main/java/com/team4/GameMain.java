@@ -17,6 +17,7 @@ import java.awt.*;
     private TutorPanel tutorPanel;
     private TimeTrialPanel timeTrial = new TimeTrialPanel(new TimeTrial());
     private ProgressPanel progressPanel;
+    private JPanel panel1;
 
     public GameMain(){
         this.setBackground(Color.WHITE);
@@ -55,6 +56,7 @@ import java.awt.*;
         this.setLayout(new BorderLayout());
         bottomPanel.setLayout(new GridLayout(1,2));
         rightPanel.setLayout(new GridLayout(2,1));
+        rightPanel.setBackground(Color.WHITE);
         leftPanel.setLayout(new GridLayout(2,1));
         towerPanel.setBackground(Color.decode("#EFF7F6"));
         leftPanel.setBackground(Color.decode("#EFF7F6"));

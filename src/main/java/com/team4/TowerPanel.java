@@ -13,7 +13,7 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         setBackground(Color.decode("#EFF7F6"));
-        for (Tower tower : GameData.getInstance().getNewTowers()) {
+        for (Tower tower : GameData.getInstance().getTowers()) {
             tower.draw(g);
         }
         for (NewDisk disk : GameData.getInstance().getNewDisks()) {

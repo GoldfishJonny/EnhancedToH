@@ -101,6 +101,9 @@ public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
 
         if (evt.getPropertyName().equals("gameOver")) {
             int gameOver = (int) evt.getNewValue();
+            if (gameOver == 0){
+                timeTrial.stop();
+            }
             if (gameOver == 1) {
                 time = timeTrial.stop();
                 GameData.getInstance().changeBestTime(time);

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 public class TutorPanel  extends JPanel implements PropertyChangeListener {
     private JButton helpButton;
@@ -15,7 +16,6 @@ public class TutorPanel  extends JPanel implements PropertyChangeListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        setBackground(Color.WHITE);
         tutor.draw(g);
     }
 
@@ -26,8 +26,10 @@ public class TutorPanel  extends JPanel implements PropertyChangeListener {
         helpButton.setBackground(Color.decode("#F7D6E0"));
         helpButton.addActionListener(e -> {
             // Call the method to restart the game from GameData
-            GameData.getInstance().solveGame();
-            tutor.setMove(GameData.getInstance().getSolver().getNextMove());
+            int[] m = GameData.getInstance().getDisks();
+            List<int[]> n = GameData.getInstance().solveGame();
+            tutor.setMove(m, n.get(0));
+            GameData.getInstance().setAskedForHelp(tutor.getDisk(), tutor.getTower());
             // Repaint the panel to reflect the changes
             repaint();
         });

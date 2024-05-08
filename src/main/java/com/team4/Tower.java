@@ -34,6 +34,11 @@ public class Tower {
             g.fillRect(x - 5, y - 100, width, 100);
             g.setColor(Color.YELLOW);
             g.drawRect(x - 5, y - 100, width, 100);
+        } else if (GameData.getInstance().getAskedForHelpT() == this) {
+            g.setColor(Color.WHITE);
+            g.fillRect(x - 5, y - 100, width, 100);
+            g.setColor(Color.BLACK);
+            g.drawRect(x - 5, y - 100, width, 100);
         } else {
             g.setColor(Color.BLACK);
             g.fillRect(x - 5, y - 100, width, 100);

@@ -36,6 +36,11 @@ public class NewDisk extends Disk{
             g.fillRect(diskX, diskY, width, height);
             g.setColor(Color.RED);
             g.drawRect(diskX, diskY, width, height);
+        } else if (GameData.getInstance().getAskedForHelpD() == this) {
+            g.setColor(Color.WHITE);
+            g.fillRect(diskX, diskY, width, height);
+            g.setColor(Color.BLACK);
+            g.drawRect(diskX, diskY, width, height);
         } else {
             g.setColor(color);
             g.fillRect(diskX, diskY, width, height);

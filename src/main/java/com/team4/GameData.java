@@ -30,6 +30,8 @@ public class GameData extends PropertyChangeSupport {
     private int moves = 0;
     private int gameOver = 0;
     private Solver solver;
+    private NewDisk askedForHelpD = null;
+    private Tower askedForHelpT = null;
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
@@ -72,7 +74,7 @@ public class GameData extends PropertyChangeSupport {
         return instance;
     }
 
-    public List<Tower> getNewTowers(){ return towers; }
+    public List<Tower> getTowers(){ return towers; }
 
     public List<NewDisk> getNewDisks(){ return disks; }
 
@@ -91,9 +93,17 @@ public class GameData extends PropertyChangeSupport {
         this.recalculate();
     }
 
-    public void solveGame(){
-        solver.getMoves().clear();
-        solver.hanoi(towers.get(0).getID(), towers.get(2).getID(), towers.get(1).getID(), towers.get(0).getDisksOnTower().size());
+    public List<int[]> solveGame(){
+        int[] n = getDisks();
+        return solver.solve(n, nDisks);
+    }
+
+    public int[] getDisks() {
+        int[] n = new int[nDisks];
+        for (int i = 0; i < nDisks; i++) {
+            n[2- i] = disks.get(i).getTower().getID();
+        }
+        return n;
     }
     public void repaint() {
         firePropertyChange("repaint", null, null);
@@ -177,6 +187,21 @@ public class GameData extends PropertyChangeSupport {
         }
     }
 
+    public void setAskedForHelp (NewDisk b, Tower c) {
+        askedForHelpD = b;
+        askedForHelpT = c;
+        firePropertyChange("askedForHelp", null, askedForHelpD);
+        firePropertyChange("askedForHelpTower", null, askedForHelpT);
+    }
+
+    public NewDisk getAskedForHelpD() {
+        return askedForHelpD;
+    }
+
+    public Tower getAskedForHelpT(){
+        return askedForHelpT;
+    }
+
     public void restart() {
         for (Tower tower : towers) {
             tower.getDisksOnTower().clear();
@@ -189,6 +214,6 @@ public class GameData extends PropertyChangeSupport {
         this.progressPanel.resetProgress();
         firePropertyChange("moves", null, moves);
         firePropertyChange("counter", null, counter);
-        firePropertyChange("gameOver", null, 1);
+        firePropertyChange("gameOver", null, gameOver);
     }
 }
