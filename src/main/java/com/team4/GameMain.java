@@ -15,6 +15,7 @@ import java.awt.*;
     private NavbarPanel navbarPanel;
     private TowerPanel towerPanel;
     private TutorPanel tutorPanel;
+    private HelpPanel helpPanel;
     private TimeTrialPanel timeTrial = new TimeTrialPanel(new TimeTrial());
     private ProgressPanel progressPanel;
     private JPanel panel1;
@@ -92,37 +93,43 @@ import java.awt.*;
     }
 
     public void help(){
-        // Create the frame
-        JFrame frame = new JFrame("Towers of Hanoi Instructions");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 300);
+        // Remove main menu panel
+        remove(menuPanel);
 
-        // Create the panel
-        JPanel panel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        JPanel leftPanel = new JPanel();
+        JPanel bottomPanel = new JPanel();
+        this.setLayout(new BorderLayout());
+        bottomPanel.setLayout(new GridLayout(1,2));
+        rightPanel.setLayout(new GridLayout(2,1));
+        rightPanel.setBackground(Color.WHITE);
+        leftPanel.setLayout(new GridLayout(2,1));
+        towerPanel.setBackground(Color.decode("#EFF7F6"));
+        leftPanel.setBackground(Color.decode("#EFF7F6"));
+        leftPanel.add(towerPanel);
+        leftPanel.add(timeTrial);
 
-        // Create a text area to display instructions
-        JTextArea textArea = new JTextArea(20, 90);
-        textArea.setText("How to Play Towers of Hanoi:\n\n"
-                + "1. You have three rods and a number of disks of different sizes which can slide onto any rod.\n"
-                + "2. The puzzle starts with the disks neatly stacked in ascending order of size on one rod, the smallest at the top, thus making a conical shape.\n"
-                + "3. The objective of the puzzle is to move the entire stack to another rod, obeying the following rules:\n"
-                + "   a. Only one disk can be moved at a time.\n"
-                + "   b. Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack or on an empty rod.\n"
-                + "   c. No disk may be placed on top of a smaller disk.\n"
-                + "4. The minimum number of moves required to solve a Tower of Hanoi puzzle is 2^n - 1, where n is the number of disks.");
-        textArea.setEditable(false);
-        textArea.setFont(new Font("SansSerif", Font.BOLD, 15));
+        rightPanel.add(tutorPanel);
+        bottomPanel.add(leftPanel);
+        bottomPanel.add(rightPanel);
+        this.add(navbarPanel);
+        this.add(bottomPanel);
 
-        // Wrap the text area in a scroll pane
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        GameController controller = new GameController();
+        towerPanel.addMouseListener(controller);
+        towerPanel.addMouseMotionListener(controller);
+        towerPanel.addComponentListener(controller);
 
-        // Add the scroll pane to the panel
-        panel.add(scrollPane);
+        GameData.getInstance().setnDisks(3);
+        GameData.getInstance().setSize(this.getWidth(), this.getHeight());
+        GameData.getInstance().addPropertyChangeListener(towerPanel);
 
-        // Add the panel to the frame
-        frame.add(panel);
+        ProgressPanel progressPanel = GameData.getInstance().getProgressPanel();
+        this.add(progressPanel, BorderLayout.NORTH);
+        System.out.println("ProgressPanel added to GameMain");
 
-        // Set the frame's visibility to true to show it
-        frame.setVisible(true);
+        // Revalidate and repaint
+        revalidate();
+        repaint();
     }
  }
