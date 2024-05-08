@@ -1,5 +1,6 @@
-package com.team4;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.team4.PathFinder;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.ArrayList;
@@ -111,8 +112,8 @@ class PathFinderTest {
 
         List<String> moves = PathFinder.getPossibleMoves(state);
         assertEquals(3, moves.size(), "There should be three possible moves.");
-        assertEquals("Move disk from tower 2 to tower `3`", moves.get(0), "1");
+        assertEquals("Move disk from tower 2 to tower 1", moves.get(0), "1");
         assertEquals("Move disk from tower 3 to tower 1", moves.get(1), "2");
-        assertEquals("Move disk from tower 3 to tower 1", moves.get(2), "3");
+        assertEquals("Move disk from tower 3 to tower 2", moves.get(2), "3");
     }
 }

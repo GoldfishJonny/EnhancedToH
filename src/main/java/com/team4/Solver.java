@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+/**
+ * The Solver class for the Towers of Hanoi game.
+ * It solves the Towers of Hanoi game using recursion.
+ * It moves disks from one peg to another peg.
+ * It uses the moveDisks method to solve the game.
+ * @Author Jonathan Jara
+ *
+ */
+
 
 public class Solver {
 //    private List<int[]> moves; // List to store move instructions
