@@ -16,7 +16,9 @@ public class MenuPanel extends JPanel {
         setBackground(Color.BLACK);
 
         // Adding the background image
-        ImageIcon backgroundImage = new ImageIcon("t3.png");
+//        ImageIcon backgroundImage = new ImageIcon("./src/main/resources/t3.png");
+        ImageIcon backgroundImage = new ImageIcon(GameMain.class.getResource("/t3.png"));
+        repaint();
         JLabel backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setLayout(new BorderLayout());
         backgroundLabel.setPreferredSize(new Dimension(backgroundImage.getIconWidth(), backgroundImage.getIconHeight())); // Set preferred size
