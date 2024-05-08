@@ -11,9 +11,9 @@ import java.beans.PropertyChangeListener;
  * It also listens for when the game starts and when it ends, to start and stop the timer.
  */
 public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
-    private TimeTrial timeTrial;
-    private JLabel timeLabel;
-    private JLabel bestTimeLabel;
+    private final TimeTrial timeTrial;
+    private final JLabel timeLabel;
+    private final JLabel bestTimeLabel;
     private long time;
 
     /**
@@ -68,7 +68,7 @@ public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
     }
 
     /**
-     * Invoked when a property change is detected. 
+     * Invoked when a property change is detected.
      * Updates the best time label when the best time changes.
      * Starts the timer when game starts.
      * Stops the timer when game ends.
@@ -101,7 +101,7 @@ public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
 
         if (evt.getPropertyName().equals("gameOver")) {
             int gameOver = (int) evt.getNewValue();
-            if (gameOver == 0){
+            if (gameOver == 0) {
                 timeTrial.stop();
             }
             if (gameOver == 1) {

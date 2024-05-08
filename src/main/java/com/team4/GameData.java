@@ -1,15 +1,18 @@
 package com.team4;
+
 import java.awt.*;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 /**
  * Game data for the Towers of Hanoi game.
  * It contains the disks and towers, and recalculate their positions.
  * It extends PropertyChangeSupport to notify observers of changes in the game data.
- *
+ * <p>
  * Base code provided by Professor.
+ *
  * @author Jonathan Jara
  */
 
@@ -19,19 +22,20 @@ public class GameData extends PropertyChangeSupport {
     private int windowHeight;
     private ProgressPanel progressPanel;
     private int nDisks;
-    private List<NewDisk> disks;
-    private List<Tower> towers;
+    private final List<NewDisk> disks;
+    private final List<Tower> towers;
     private NewDisk selectedDisk = null;
     private int mouseYOffset = 0;
-    private Tutor tutor;
+    private final Tutor tutor;
     private long bestTime = 0;
     private int counter = 0;
 
     private int moves = 0;
-    private int gameOver = 0;
     private Solver solver;
     private NewDisk askedForHelpD = null;
     private Tower askedForHelpT = null;
+    private int mouseXOffset = 0;
+
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
@@ -42,7 +46,14 @@ public class GameData extends PropertyChangeSupport {
         this.solver = new Solver();
     }
 
-    public void recalculate () {
+    public static GameData getInstance() {
+        if (instance == null) {
+            instance = new GameData(0);
+        }
+        return instance;
+    }
+
+    public void recalculate() {
         if (nDisks == 0 || windowsWidth == 0 || windowHeight == 0) {
             return;
         }
@@ -67,33 +78,38 @@ public class GameData extends PropertyChangeSupport {
         repaint();
     }
 
-    public static GameData getInstance() {
-        if (instance == null) {
-            instance = new GameData(0);
-        }
-        return instance;
+    public List<Tower> getTowers() {
+        return towers;
     }
 
-    public List<Tower> getTowers(){ return towers; }
+    public List<NewDisk> getNewDisks() {
+        return disks;
+    }
 
-    public List<NewDisk> getNewDisks(){ return disks; }
+    public NewDisk getSelectedDisk() {
+        return selectedDisk;
+    }
 
-    public NewDisk getSelectedDisk() { return selectedDisk; }
-    public void setSelectedDisk(NewDisk selectedDisk) { this.selectedDisk = selectedDisk; }
+    public void setSelectedDisk(NewDisk selectedDisk) {
+        this.selectedDisk = selectedDisk;
+    }
+
+    public int getnDisks() {
+        return nDisks;
+    }
+
     public void setnDisks(int nDisks) {
         this.nDisks = nDisks;
         this.recalculate();
     }
-    public int getnDisks() {
-        return nDisks;
-    }
+
     public void setSize(int windowWidth, int windowHeight) {
         this.windowsWidth = windowWidth;
         this.windowHeight = windowHeight;
         this.recalculate();
     }
 
-    public List<int[]> solveGame(){
+    public List<int[]> solveGame() {
         int[] n = getDisks();
         return solver.solve(n, nDisks);
     }
@@ -101,13 +117,15 @@ public class GameData extends PropertyChangeSupport {
     public int[] getDisks() {
         int[] n = new int[nDisks];
         for (int i = 0; i < nDisks; i++) {
-            n[2- i] = disks.get(i).getTower().getID();
+            n[2 - i] = disks.get(i).getTower().getID();
         }
         return n;
     }
+
     public void repaint() {
         firePropertyChange("repaint", null, null);
     }
+
     public int getMouseXOffset() {
         return mouseXOffset;
     }
@@ -115,8 +133,6 @@ public class GameData extends PropertyChangeSupport {
     public void setMouseXOffset(int mouseXOffset) {
         this.mouseXOffset = mouseXOffset;
     }
-
-    private int mouseXOffset = 0;
 
     public int getMouseYOffset() {
         return mouseYOffset;
@@ -126,7 +142,7 @@ public class GameData extends PropertyChangeSupport {
         this.mouseYOffset = mouseYOffset;
     }
 
-    public Tutor getTutor(){
+    public Tutor getTutor() {
         return tutor;
     }
 
@@ -144,20 +160,25 @@ public class GameData extends PropertyChangeSupport {
             firePropertyChange("bestTime", null, bestTime);
         }
     }
+
     public void setCounter(int counter) {
         this.counter += counter;
         firePropertyChange("counter", null, counter);
     }
 
-    public void iterateMoves(){
+    public void iterateMoves() {
         moves++;
         firePropertyChange("moves", null, moves);
         System.out.println("Moves incremented: " + moves);
     }
 
-    public int getMoves(){
+    public int getMoves() {
         return moves;
     }
+
+//    public void setMoves(int moves) {
+//        this.moves = moves;
+//    }
 
     public int getProgress() {
         // Calculate the total number of moves required to solve the Tower of Hanoi puzzle
@@ -171,9 +192,10 @@ public class GameData extends PropertyChangeSupport {
     }
 
 
-    public Solver getSolver() {
-        return solver;
-    }
+//    public Solver getSolver() {
+//        return solver;
+//    }
+
     public ProgressPanel getProgressPanel() {
         if (progressPanel == null) {
             progressPanel = new ProgressPanel();
@@ -187,7 +209,7 @@ public class GameData extends PropertyChangeSupport {
         }
     }
 
-    public void setAskedForHelp (NewDisk b, Tower c) {
+    public void setAskedForHelp(NewDisk b, Tower c) {
         askedForHelpD = b;
         askedForHelpT = c;
         firePropertyChange("askedForHelp", null, askedForHelpD);
@@ -198,9 +220,17 @@ public class GameData extends PropertyChangeSupport {
         return askedForHelpD;
     }
 
-    public Tower getAskedForHelpT(){
+    public Tower getAskedForHelpT() {
         return askedForHelpT;
     }
+
+//    public long getBestTime() {
+//        return bestTime;
+//    }
+//
+//    public void setBestTime(long bestTime) {
+//        this.bestTime = bestTime;
+//    }
 
     public void restart() {
         for (Tower tower : towers) {
@@ -210,7 +240,7 @@ public class GameData extends PropertyChangeSupport {
         solver = new Solver();
         moves = 0;
         counter = 0;
-        gameOver = 0;
+        int gameOver = 0;
         this.progressPanel.resetProgress();
         firePropertyChange("moves", null, moves);
         firePropertyChange("counter", null, counter);

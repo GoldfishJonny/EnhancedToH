@@ -1,36 +1,28 @@
 package com.team4;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+
 /**
  * The Solver class for the Towers of Hanoi game.
  * It solves the Towers of Hanoi game using recursion.
  * It moves disks from one peg to another peg.
  * It uses the moveDisks method to solve the game.
- * @Author Jonathan Jara
  *
+ * @Author Jonathan Jara
  */
 
 
 public class Solver {
-//    private List<int[]> moves; // List to store move instructions
 
-    // Disk & Tower
-    private int[] disks;
-
-    private List<int[]> moves = new ArrayList<>();
-
-    private int currentMoveIndex = 0; //track the current move
+    private final List<int[]> moves;
 
     public Solver() {
         this.moves = new ArrayList<>(); // Initialize the moves list
     }
 
-    public static void moveDisks(int[] diskPositions, int disksToMove, int targetPeg, List<int[]> answer)
-    {
-        for (int badDisk = disksToMove-1; badDisk >= 0; --badDisk) {
+    public static void moveDisks(int[] diskPositions, int disksToMove, int targetPeg, List<int[]> answer) {
+        for (int badDisk = disksToMove - 1; badDisk >= 0; --badDisk) {
             int currentPeg = diskPositions[badDisk];
             if (currentPeg != targetPeg) {
                 // found the largest disk on the wrong peg
@@ -48,11 +40,8 @@ public class Solver {
                         "Move " + badDisk + " from " + currentPeg + " to " + targetPeg
                 );
                 int[] disks = new int[diskPositions.length];
-                for (int i = 0; i < diskPositions.length; i++) {
-                    disks[i] = diskPositions[i];
-                }
+                System.arraycopy(diskPositions, 0, disks, 0, diskPositions.length);
                 answer.add(disks);
-//                answer[badDisk] = targetPeg;
 
                 //Now we can put the smaller ones in the right place
                 moveDisks(diskPositions, badDisk, targetPeg, answer);
@@ -61,6 +50,12 @@ public class Solver {
         }
     }
 
+
+    public List<int[]> solve(int[] n, int num) {
+        moves.clear();
+        moveDisks(n, num, 2, moves);
+        return moves;
+    }
 //    public void hanoi(int from, int to, int buf, int nmv) {
 //        if (nmv > 0) {
 //            hanoi(from, buf, to, nmv - 1);
@@ -72,14 +67,6 @@ public class Solver {
 //    public List<int[]> getMoves() {
 //        return moves;
 //    }
-
-    public List<int[]> solve(int[] n, int num){
-        moves.clear();
-        moveDisks(n, num, 2, moves);
-        return moves;
-    }
-
-
 
 
     // Method to get the next move and increment the move index
