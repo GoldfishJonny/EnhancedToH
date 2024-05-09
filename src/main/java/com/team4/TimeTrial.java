@@ -10,7 +10,8 @@ import java.util.TimerTask;
 public class TimeTrial {
     private Timer timer; 
     private long elapsedTime; 
-    private boolean running; 
+    private boolean running;
+    private LeaderBoardManager leaderBoardManager;
 
     /**
      * Constructs a TimeTrial object with initial values.
@@ -19,6 +20,7 @@ public class TimeTrial {
         timer = new Timer(); 
         elapsedTime = 0;
         running = false;
+        leaderBoardManager = new LeaderBoardManager();
     }
 
     /**
@@ -29,10 +31,10 @@ public class TimeTrial {
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    elapsedTime += 100; 
+                    elapsedTime += 100;
                 }
-            }, 0, 100); 
-            running = true; 
+            }, 0, 100);
+            running = true;
         }
     }
 
@@ -42,11 +44,14 @@ public class TimeTrial {
      * @return The elapsed time in milliseconds.
      */
     public long stop() {
-        if (running) { 
-            timer.cancel(); 
+        if (running) {
+            timer.cancel();
             running = false;
+            String formattedTime = formatElapsedTime(); // Get formatted time
+            leaderBoardManager.addTime(formattedTime); // Save to leaderboard
         }
-        return elapsedTime; 
+        System.out.println("Game Over! Time taken: " + elapsedTime);
+        return elapsedTime;
     }
 
     /**
@@ -56,7 +61,7 @@ public class TimeTrial {
         if (!running) {
             timer = new Timer();
             elapsedTime = 0;
-            start(); 
+            start();
         }
     }
 
