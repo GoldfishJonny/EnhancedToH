@@ -22,7 +22,6 @@ public class ProcessData {
         } catch (Exception e) {
             System.out.println("Error saving data to database");
             e.printStackTrace();
-
         }
     }
 
