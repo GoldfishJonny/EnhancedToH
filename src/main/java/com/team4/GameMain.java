@@ -1,7 +1,9 @@
 package com.team4;
+import org.json.JSONObject;
+
 import javax.swing.*;
 import java.awt.*;
-
+import java.io.*;
 /**
  * The main class for the Towers of Hanoi game.
  * It extends creates a new TowerPanel object to display the game.
@@ -37,6 +39,17 @@ import java.awt.*;
         GameData.getInstance().setnDisks(3);
         GameData.getInstance().setSize(getWidth(), getHeight());
         GameData.getInstance().addPropertyChangeListener(towerPanel);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                JSONObject data = new JSONObject();
+                File f = new File("data.json");
+                if (f.exists() && !f.isDirectory()) {
+                    f.delete();
+                }
+                GameData.getInstance().getProcessData().saveData(data);
+            }
+        });
     }
         public static void main(String[] args) {
             GameMain main = new GameMain();
@@ -78,6 +91,11 @@ import java.awt.*;
         GameData.getInstance().setnDisks(3);
         GameData.getInstance().setSize(this.getWidth(), this.getHeight());
         GameData.getInstance().addPropertyChangeListener(towerPanel);
+        //if file data.json exists, load data from file
+        File f = new File("data.json");
+        if (f.exists() && !f.isDirectory()) {
+            GameData.getInstance().getProcessData().loadData();
+        }
 
         ProgressPanel progressPanel = GameData.getInstance().getProgressPanel();
         this.add(progressPanel, BorderLayout.NORTH);

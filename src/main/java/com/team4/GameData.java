@@ -1,5 +1,7 @@
 package com.team4;
 
+import org.json.JSONArray;
+
 import java.awt.*;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ public class GameData extends PropertyChangeSupport {
     private Tower askedForHelpT = null;
     private int mouseXOffset = 0;
 
+    private ProcessData processData;
+
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
@@ -44,6 +48,7 @@ public class GameData extends PropertyChangeSupport {
         tutor = new Tutor();
         this.recalculate();
         this.solver = new Solver();
+        this.processData = new ProcessData();
     }
 
     public static GameData getInstance() {
@@ -122,6 +127,15 @@ public class GameData extends PropertyChangeSupport {
         return n;
     }
 
+    public void setDisks(JSONArray n) {
+        for (int i = 0; i < nDisks; i++) {
+            disks.get(i).setTower(towers.get(n.getInt(i)));
+        }
+    }
+
+    public void setMoves(int moves) {
+        this.moves = moves;
+    }
     public void repaint() {
         firePropertyChange("repaint", null, null);
     }
@@ -203,6 +217,9 @@ public class GameData extends PropertyChangeSupport {
         return progressPanel;
     }
 
+    public ProcessData getProcessData() {
+        return processData;
+    }
     public void setGameOver(boolean b) {
         if (b) {
             firePropertyChange("gameOver", null, 1);
@@ -224,13 +241,14 @@ public class GameData extends PropertyChangeSupport {
         return askedForHelpT;
     }
 
-//    public long getBestTime() {
-//        return bestTime;
-//    }
-//
-//    public void setBestTime(long bestTime) {
-//        this.bestTime = bestTime;
-//    }
+    public long getBestTime() {
+        return bestTime;
+    }
+
+    public void setBestTime(long bestTime) {
+        this.bestTime = bestTime;
+        firePropertyChange("bestTime", null, bestTime);
+    }
 
     public void restart() {
         for (Tower tower : towers) {
