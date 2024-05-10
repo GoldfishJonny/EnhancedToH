@@ -101,6 +101,10 @@ import java.io.*;
         // Add progress panel
         add(progressPanel, BorderLayout.NORTH);
 
+        // Add StorePanel
+        StorePanel storePanel = new StorePanel();
+        rightPanel.add(storePanel, BorderLayout.EAST);
+
         // Refresh the UI
         revalidate();
         repaint();
