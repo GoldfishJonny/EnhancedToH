@@ -64,4 +64,12 @@ public class NewDisk extends Disk{
     public Tower getTower() { return tower; }
 
     public void setTower(Tower tower) { this.tower = tower; }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }
