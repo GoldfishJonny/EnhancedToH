@@ -50,38 +50,9 @@ public class Solver {
         }
     }
 
-
     public List<int[]> solve(int[] n, int num) {
         moves.clear();
         moveDisks(n, num, 2, moves);
         return moves;
     }
-//    public void hanoi(int from, int to, int buf, int nmv) {
-//        if (nmv > 0) {
-//            hanoi(from, buf, to, nmv - 1);
-//            moves.add(new int[]{from+1, to+1, nmv}); // Add move as an int array
-//            hanoi(buf, to, from, nmv - 1);
-//        }
-//    }
-//
-//    public List<int[]> getMoves() {
-//        return moves;
-//    }
-
-
-    // Method to get the next move and increment the move index
-//    public String getNextMove() {
-//        if (currentMoveIndex < moves.size()) {
-//            String move = Arrays.toString(moves.get(currentMoveIndex));
-//            currentMoveIndex++; // Move to the next index
-//            return move;
-//        } else {
-//            return "Congratulations, you completed the towers!"; // When all moves have been shown
-//        }
-//    }
-//    public void resetMoves() {
-//        currentMoveIndex = 0; // Reset the current move index to 0, reset works
-//    }
-    // maybe a method that just figures out the next move only?
-
 }

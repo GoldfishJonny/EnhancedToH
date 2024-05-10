@@ -190,10 +190,6 @@ public class GameData extends PropertyChangeSupport {
         return moves;
     }
 
-//    public void setMoves(int moves) {
-//        this.moves = moves;
-//    }
-
     public int getProgress() {
         // Calculate the total number of moves required to solve the Tower of Hanoi puzzle
         int totalMoves = (int) Math.pow(2, getnDisks()) - 1;
@@ -204,11 +200,6 @@ public class GameData extends PropertyChangeSupport {
         // Ensure the progress percentage is within the range [0, 100]
         return (int) Math.round(progressPercentage);
     }
-
-
-//    public Solver getSolver() {
-//        return solver;
-//    }
 
     public ProgressPanel getProgressPanel() {
         if (progressPanel == null) {

@@ -22,6 +22,9 @@ import java.io.*;
     private ProgressPanel progressPanel;
     private JPanel panel1;
     private LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(new LeaderBoardManager());
+    private CurrencyPanel currencyPanel = new CurrencyPanel();
+
+
 
 
     public GameMain(){
@@ -100,6 +103,16 @@ import java.io.*;
 
         // Add progress panel
         add(progressPanel, BorderLayout.NORTH);
+
+        // Add StorePanel
+        StorePanel storePanel = new StorePanel(currencyPanel);
+        rightPanel.add(storePanel, BorderLayout.EAST);
+
+        // Create a CurrencyPanel instance
+        CurrencyPanel currencyPanel = new CurrencyPanel();
+
+        // Add CurrencyPanel to the top-left corner
+        add(currencyPanel, BorderLayout.NORTH);
 
         // Refresh the UI
         revalidate();
