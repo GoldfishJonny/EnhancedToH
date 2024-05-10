@@ -1,6 +1,6 @@
 import com.team4.Solver;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,9 @@ public class SolverTest {
         answer1.add(new int[]{0, 1, 2});
         answer1.add(new int[]{0, 2, 2});
         answer1.add(new int[]{2, 2, 2});
-        Assert.assertArrayEquals(answer1.get(0), answer.get(0));
-        Assert.assertArrayEquals(answer1.get(1), answer.get(1));
-        Assert.assertArrayEquals(answer1.get(2), answer.get(2));
-        System.out.println("-----------------------------------");
+        assertArrayEquals(answer1.get(0), answer.get(0));
+        assertArrayEquals(answer1.get(1), answer.get(1));
+        assertArrayEquals(answer1.get(2), answer.get(2));
         int[] diskPos2 = {0, 0, 0};
         List<int[]> answer3 = new ArrayList<>();
         Solver.moveDisks(diskPos2, disksToMove, targetPeg, answer3);
@@ -35,10 +34,9 @@ public class SolverTest {
         answer4.add(new int[]{0, 1, 2});
         answer4.add(new int[]{0, 2, 2});
         answer4.add(new int[]{2, 2, 2});
-        Assert.assertArrayEquals(answer4.get(0), answer3.get(0));
-        Assert.assertArrayEquals(answer4.get(1), answer3.get(1));
-        Assert.assertArrayEquals(answer4.get(2), answer3.get(2));
-        System.out.println("-----------------------------------");
+        assertArrayEquals(answer4.get(0), answer3.get(0));
+        assertArrayEquals(answer4.get(1), answer3.get(1));
+        assertArrayEquals(answer4.get(2), answer3.get(2));
         int diskPos3[] = {1, 0, 0};
         List<int[]> answer5 = new ArrayList<>();
         Solver.moveDisks(diskPos3, disksToMove, targetPeg, answer5);
@@ -50,10 +48,9 @@ public class SolverTest {
         answer6.add(new int[]{0, 1, 2});
         answer6.add(new int[]{0, 2, 2});
         answer6.add(new int[]{2, 2, 2});
-        Assert.assertArrayEquals(answer6.get(0), answer5.get(0));
-        Assert.assertArrayEquals(answer6.get(1), answer5.get(1));
-        Assert.assertArrayEquals(answer6.get(2), answer5.get(2));
-        System.out.println("-----------------------------------");
+        assertArrayEquals(answer6.get(0), answer5.get(0));
+        assertArrayEquals(answer6.get(1), answer5.get(1));
+        assertArrayEquals(answer6.get(2), answer5.get(2));
         int diskPos4[] = {0, 1, 0};
         List<int[]> answer7 = new ArrayList<>();
         Solver.moveDisks(diskPos4, disksToMove, targetPeg, answer7);
@@ -63,8 +60,8 @@ public class SolverTest {
         answer8.add(new int[]{0, 1, 2});
         answer8.add(new int[]{0, 2, 2});
         answer8.add(new int[]{2, 2, 2});
-        Assert.assertArrayEquals(answer8.get(0), answer7.get(0));
-        Assert.assertArrayEquals(answer8.get(1), answer7.get(1));
-        Assert.assertArrayEquals(answer8.get(2), answer7.get(2));
+        assertArrayEquals(answer8.get(0), answer7.get(0));
+        assertArrayEquals(answer8.get(1), answer7.get(1));
+        assertArrayEquals(answer8.get(2), answer7.get(2));
     }
 }

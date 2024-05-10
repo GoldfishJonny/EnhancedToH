@@ -1,7 +1,8 @@
 import com.team4.GameData;
 import com.team4.Solver;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import com.team4.ProcessData;
 import org.json.JSONObject;
@@ -19,8 +20,8 @@ public class ProcessDataTest {
         ProcessData processData = new ProcessData();
         JSONObject data = new JSONObject();
         processData.saveData(data);
-        Assert.assertEquals("Data saved to database", "Data saved to database");
-        Assert.assertEquals(data.toString(), "{\"Disks\":[],\"Best Time\":10}");
+        assertEquals("Data saved to database", "Data saved to database");
+        assertEquals(data.toString(), "{\"Disks\":[],\"Best Time\":10}");
     }
 
     @Test
@@ -32,6 +33,6 @@ public class ProcessDataTest {
         // Expected output: {"Best Time":10}
         ProcessData processData = new ProcessData();
         processData.loadData();
-        Assert.assertEquals("Data loaded from database", "Data loaded from database");
+        assertEquals("Data loaded from database", "Data loaded from database");
     }
 }

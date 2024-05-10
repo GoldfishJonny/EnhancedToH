@@ -44,11 +44,11 @@ import java.io.*;
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                JSONObject data = new JSONObject();
                 File f = new File("data.json");
                 if (f.exists() && !f.isDirectory()) {
                     f.delete();
                 }
+                JSONObject data = new JSONObject();
                 GameData.getInstance().getProcessData().saveData(data);
             }
         });

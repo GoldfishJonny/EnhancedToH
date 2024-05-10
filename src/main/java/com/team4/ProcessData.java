@@ -14,7 +14,7 @@ public class ProcessData {
         data.put("Best Time", GameData.getInstance().getBestTime());
 //        data.put("Moves", GameData.getInstance().getMoves());
         data.put("Disks", GameData.getInstance().getDisks());
-        System.out.println(data);
+//        System.out.println(data);
         System.out.println("Data saved to database");
         try (FileWriter file = new FileWriter("data.json")) {
             file.write(data.toString());
@@ -34,7 +34,7 @@ public class ProcessData {
             // Read data from database
             JSONTokener jsonParser = new JSONTokener(reader);
             JSONObject data = new JSONObject(jsonParser);
-            System.out.println(data);
+//            System.out.println(data);
             GameData.getInstance().setBestTime(data.getInt("Best Time"));
 //            GameData.getInstance().setMoves(data.getInt("Moves"));
             GameData.getInstance().setDisks(data.getJSONArray("Disks"));

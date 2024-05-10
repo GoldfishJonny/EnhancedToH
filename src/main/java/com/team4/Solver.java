@@ -36,9 +36,9 @@ public class Solver {
 
                 // Move
                 diskPositions[badDisk] = targetPeg;
-                System.out.println(
-                        "Move " + badDisk + " from " + currentPeg + " to " + targetPeg
-                );
+//                System.out.println(
+//                        "Move " + badDisk + " from " + currentPeg + " to " + targetPeg
+//                );
                 int[] disks = new int[diskPositions.length];
                 System.arraycopy(diskPositions, 0, disks, 0, diskPositions.length);
                 answer.add(disks);
