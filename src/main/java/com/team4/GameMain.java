@@ -112,43 +112,12 @@ import java.io.*;
     }
 
     public void help(){
-        // Remove main menu panel
-        remove(menuPanel);
+        getContentPane().removeAll(); // Remove all components from the JFrame
 
-        JPanel rightPanel = new JPanel();
-        JPanel leftPanel = new JPanel();
-        JPanel bottomPanel = new JPanel();
-        this.setLayout(new BorderLayout());
-        bottomPanel.setLayout(new GridLayout(1,2));
-        rightPanel.setLayout(new GridLayout(2,1));
-        rightPanel.setBackground(Color.WHITE);
-        leftPanel.setLayout(new GridLayout(2,1));
-        towerPanel.setBackground(Color.decode("#EFF7F6"));
-        leftPanel.setBackground(Color.decode("#EFF7F6"));
-        leftPanel.add(towerPanel);
-        leftPanel.add(timeTrial);
+        HelpPanel helpPanel = new HelpPanel(); // Assuming HelpPanel is already implemented
+        add(helpPanel, BorderLayout.CENTER); // Add HelpPanel to the center of the JFrame
 
-        rightPanel.add(tutorPanel);
-        bottomPanel.add(leftPanel);
-        bottomPanel.add(rightPanel);
-        this.add(navbarPanel);
-        this.add(bottomPanel);
-
-        GameController controller = new GameController();
-        towerPanel.addMouseListener(controller);
-        towerPanel.addMouseMotionListener(controller);
-        towerPanel.addComponentListener(controller);
-
-        GameData.getInstance().setnDisks(3);
-        GameData.getInstance().setSize(this.getWidth(), this.getHeight());
-        GameData.getInstance().addPropertyChangeListener(towerPanel);
-
-        ProgressPanel progressPanel = GameData.getInstance().getProgressPanel();
-        this.add(progressPanel, BorderLayout.NORTH);
-        System.out.println("ProgressPanel added to GameMain");
-
-        // Revalidate and repaint
-        revalidate();
-        repaint();
+        validate(); // Validate the container after components added
+        repaint(); // Repaint the container to reflect the changes
     }
  }
