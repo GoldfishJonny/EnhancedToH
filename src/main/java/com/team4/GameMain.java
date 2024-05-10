@@ -21,6 +21,8 @@ import java.io.*;
     private TimeTrialPanel timeTrial = new TimeTrialPanel(new TimeTrial());
     private ProgressPanel progressPanel;
     private JPanel panel1;
+    private LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(new LeaderBoardManager());
+
 
     public GameMain(){
         this.setBackground(Color.WHITE);
@@ -61,50 +63,49 @@ import java.io.*;
 
 
     public void startGame() {
-        // Remove main menu panel
-        remove(menuPanel);
+        remove(menuPanel); // Removing the main menu panel
 
-        JPanel rightPanel = new JPanel();
-        JPanel leftPanel = new JPanel();
-        JPanel bottomPanel = new JPanel();
-        this.setLayout(new BorderLayout());
-        bottomPanel.setLayout(new GridLayout(1,2));
-        rightPanel.setLayout(new GridLayout(2,1));
-        rightPanel.setBackground(Color.WHITE);
-        leftPanel.setLayout(new GridLayout(2,1));
+        // Preparing panels
+        JPanel rightPanel = new JPanel(new BorderLayout());
+        JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+        JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
+
+        // Setting backgrounds and adding components
         towerPanel.setBackground(Color.decode("#EFF7F6"));
         leftPanel.setBackground(Color.decode("#EFF7F6"));
         leftPanel.add(towerPanel);
         leftPanel.add(timeTrial);
 
-        rightPanel.add(tutorPanel);
+        rightPanel.add(tutorPanel, BorderLayout.CENTER);
+        rightPanel.add(leaderboardPanel, BorderLayout.SOUTH);  // Add leaderboard to the bottom of the right panel
+
         bottomPanel.add(leftPanel);
         bottomPanel.add(rightPanel);
-        this.add(navbarPanel);
-        this.add(bottomPanel);
 
+        // Add panels to the main frame
+        add(navbarPanel, BorderLayout.NORTH);
+        add(bottomPanel, BorderLayout.CENTER);
+
+        // Setup interactions
         GameController controller = new GameController();
         towerPanel.addMouseListener(controller);
         towerPanel.addMouseMotionListener(controller);
         towerPanel.addComponentListener(controller);
 
-        GameData.getInstance().setnDisks(3);
-        GameData.getInstance().setSize(this.getWidth(), this.getHeight());
-        GameData.getInstance().addPropertyChangeListener(towerPanel);
-        //if file data.json exists, load data from file
+        // Load game data if available
         File f = new File("data.json");
         if (f.exists() && !f.isDirectory()) {
             GameData.getInstance().getProcessData().loadData();
         }
 
-        ProgressPanel progressPanel = GameData.getInstance().getProgressPanel();
-        this.add(progressPanel, BorderLayout.NORTH);
-        System.out.println("ProgressPanel added to GameMain");
+        // Add progress panel
+        add(progressPanel, BorderLayout.NORTH);
 
-        // Revalidate and repaint
+        // Refresh the UI
         revalidate();
         repaint();
     }
+
 
     public void other(){
         System.out.println("Other gamemode");

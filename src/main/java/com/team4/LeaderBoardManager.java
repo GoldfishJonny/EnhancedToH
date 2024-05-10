@@ -15,12 +15,28 @@ import java.util.List;
  */
 public class LeaderBoardManager {
     private static final String FILE_NAME = "leaderboard.txt";
+    private List<LeaderBoardObserver> observers = new ArrayList<>();
+
+    public interface LeaderBoardObserver {
+        void onUpdate();
+    }
+
+    public void addObserver(LeaderBoardObserver observer) {
+        observers.add(observer);
+    }
+
+    private void notifyObservers() {
+        for (LeaderBoardObserver observer : observers) {
+            observer.onUpdate();
+        }
+    }
 
     public void addTime(String formattedTime) {
         try (FileWriter fw = new FileWriter(FILE_NAME, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             out.println(formattedTime);
+            notifyObservers(); // Notify observers after updating the leaderboard
         } catch (IOException e) {
             System.err.println("An error occurred while writing to the leaderboard file: " + e.getMessage());
         }
