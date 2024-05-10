@@ -26,6 +26,7 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
         for (int i = GameData.getInstance().getNewDisks().size() - 1; i >= 0; i--) {
             NewDisk disk = GameData.getInstance().getNewDisks().get(i);
             if (disk.contains(e.getX(), e.getY())) {
+                SoundManager.playPickUpSound();
                 GameData.getInstance().setSelectedDisk(disk);
                 GameData.getInstance().setMouseXOffset( e.getX() - disk.getDiskX());
                 GameData.getInstance().setMouseYOffset( e.getY() - disk.getDiskY());
@@ -57,11 +58,6 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
                     if (GameData.getInstance().getTowers().get(2).getDisksOnTower().size() == GameData.getInstance().getnDisks()) {
                         GameData.getInstance().setGameOver(true);
                     }
-
-                    // Check if the disk was moved to a different tower
-//                    if (tower != oldTower) {
-//                        progressPanel.updateProgress(GameData.getInstance().getProgress());
-//                    }
 
                     if (tower != oldTower) {
                         System.out.println("Progress update triggered");

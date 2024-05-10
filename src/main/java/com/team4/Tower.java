@@ -9,18 +9,21 @@ public class Tower {
     private boolean selected;
     private final List<NewDisk> disksOnTower;
     private int id;
+    private SoundManager soundManager;
 
     public Tower(int x, int y, int id) {
         this.x = x;
         this.y = y;
         this.id = id;
         this.disksOnTower = new ArrayList<>();
+        this.soundManager = new SoundManager();
     }
 
     public void dropDisk(NewDisk disk) {
         disk.setDiskX(x - disk.getWidth() / 2);
         disk.setDiskY(y - (disksOnTower.size() + 1) * 20);
         disksOnTower.add(disk);
+        soundManager.playDropSound();
     }
 
     public void removeDisk(NewDisk disk) {
