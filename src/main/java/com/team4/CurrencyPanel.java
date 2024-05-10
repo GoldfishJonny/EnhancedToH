@@ -45,4 +45,9 @@ public class CurrencyPanel extends JPanel {
         coins -= amount;
         coinsLabel.setText(Integer.toString(coins));
     }
+
+    public void incrementCoins(int amount) {
+        coins += amount;
+        coinsLabel.setText(Integer.toString(coins));
+    }
 }

@@ -50,5 +50,19 @@ public class StorePanel extends JPanel {
 
         add(contentPanel, BorderLayout.CENTER);
     }
+
+    public void buyItem1() {
+        // Simulate purchasing item 1
+        int itemPrice = 10;
+        int currentCoins = currencyPanel.getCoins();
+
+        if (currentCoins >= itemPrice) {
+            currencyPanel.deductCoins(itemPrice);
+            // Implement the logic to apply the effect of buying item 1
+            System.out.println("Item 1 purchased successfully!");
+        } else {
+            System.out.println("Insufficient coins to buy Item 1!");
+        }
+    }
 }
 
