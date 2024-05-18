@@ -1,7 +1,10 @@
 package com.team4;
 
+//import com.GoldfishJonny.MenuScene;
+//import com.team4.TimerScene;
 import org.json.JSONArray;
 
+import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -39,7 +42,10 @@ public class GameData extends PropertyChangeSupport {
     private int mouseXOffset = 0;
 
     private ProcessData processData;
-
+    private MenuScene menuScene;
+    private TimerScene timerScene;
+    private JFrame frame;
+    private JPanel scene;
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
@@ -56,6 +62,14 @@ public class GameData extends PropertyChangeSupport {
             instance = new GameData(0);
         }
         return instance;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
+    public JFrame getFrame() {
+        return frame;
     }
 
     public void recalculate() {
@@ -254,5 +268,37 @@ public class GameData extends PropertyChangeSupport {
         firePropertyChange("moves", null, moves);
         firePropertyChange("counter", null, counter);
         firePropertyChange("gameOver", null, gameOver);
+    }
+    public JPanel getScene() {
+        return this.scene;
+    }
+
+    public JPanel switchScene(Scene scene) {
+        JPanel scenePanel = null;
+        switch (scene) {
+            case MENU:
+                System.out.println("Switching to menu scene");
+//                this.timerScene = new MenuPanel();
+                scenePanel = new MenuScene();
+                break;
+            case TIMER:
+                System.out.println("Switching to timer scene");
+                scenePanel = new TimerScene();
+                break;
+            default:
+                System.out.println("Invalid scene");
+                break;
+        }
+        System.out.println(scenePanel);
+        this.scene = scenePanel;
+        return scenePanel;
+    }
+
+    public void reloadScene(Scene scene) {
+        this.frame.remove(this.scene);
+        JPanel Scene = this.switchScene(scene);
+        this.frame.add(Scene, BorderLayout.CENTER);
+        this.frame.revalidate();
+        this.frame.repaint();
     }
 }

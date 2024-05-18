@@ -1,31 +1,31 @@
-package com.team4;
+package com.GoldfishJonny;
+
+import com.team4.GameData;
+import com.team4.GameMain;
+import com.team4.Scene;
+//import com.team4.MenuPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MenuPanel extends JPanel {
+public class MenuScene extends JPanel {
     private JButton startButton;
     private JButton otherButton;
     private JButton helpButton;
-
-    public MenuPanel() {
+    public MenuScene() {
         setLayout(new BorderLayout());
 
-        // Set background color of the menu panel
         setBackground(Color.BLACK);
 
-        // Adding the background image
-//        ImageIcon backgroundImage = new ImageIcon("./src/main/resources/t3.png");
         ImageIcon backgroundImage = new ImageIcon(GameMain.class.getResource("/t3.png"));
         repaint();
         JLabel backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setLayout(new BorderLayout());
         backgroundLabel.setPreferredSize(new Dimension(backgroundImage.getIconWidth(), backgroundImage.getIconHeight())); // Set preferred size
         add(backgroundLabel, BorderLayout.CENTER);
-        //THIS DOESNT WORK BTW- Du lmao
 
-        // Panel for the buttons
         JPanel buttonPanel = createButtonPanel();
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -43,7 +43,7 @@ public class MenuPanel extends JPanel {
         startButton.setFont(new Font("Arial", Font.BOLD, 15));
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).startGame();
+                GameData.getInstance().reloadScene(Scene.TIMER);
             }
         });
         buttonPanel.add(startButton); // Add the start button to the buttonPanel
@@ -58,7 +58,7 @@ public class MenuPanel extends JPanel {
 
         otherButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).other();
+//                ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).other();
             }
         });
         buttonPanel.add(otherButton); // Add the other button to the buttonPanel
@@ -71,7 +71,7 @@ public class MenuPanel extends JPanel {
         helpButton.setFont(new Font("Arial", Font.BOLD, 15));
         helpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).help();
+//                ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).help();
             }
         });
         buttonPanel.add(helpButton); // Add the help button to the buttonPanel
