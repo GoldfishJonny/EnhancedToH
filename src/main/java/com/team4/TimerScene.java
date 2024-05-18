@@ -5,7 +5,11 @@ import com.team4.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-
+/**
+* TimerScene represents a JPanel that displays the game scene with the timer and the tutor.
+* It listens for changes in the game data and updates the display accordingly.
+* @author Jonathan Jara
+*/
 public class TimerScene extends JPanel {
 
     public TimerScene(){

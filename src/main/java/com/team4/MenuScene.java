@@ -57,9 +57,7 @@ public class MenuScene extends JPanel {
         otherButton.setFont(new Font("Arial", Font.BOLD, 15));
 
         otherButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-//                ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).other();
-            }
+            public void actionPerformed(ActionEvent e) { GameData.getInstance().reloadScene(Scene.STOPWATCH); }
         });
         buttonPanel.add(otherButton); // Add the other button to the buttonPanel
         buttonPanel.add(Box.createVerticalStrut(20));
@@ -70,9 +68,7 @@ public class MenuScene extends JPanel {
         helpButton.setForeground(Color.WHITE);
         helpButton.setFont(new Font("Arial", Font.BOLD, 15));
         helpButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-//                ((GameMain)SwingUtilities.getWindowAncestor(MenuPanel.this)).help();
-            }
+            public void actionPerformed(ActionEvent e) { GameData.getInstance().reloadScene(Scene.HELP); }
         });
         buttonPanel.add(helpButton); // Add the help button to the buttonPanel
         buttonPanel.add(Box.createVerticalStrut(20));

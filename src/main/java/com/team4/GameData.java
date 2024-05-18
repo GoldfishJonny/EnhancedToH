@@ -41,9 +41,7 @@ public class GameData extends PropertyChangeSupport {
     private Tower askedForHelpT = null;
     private int mouseXOffset = 0;
 
-    private ProcessData processData;
-    private MenuScene menuScene;
-    private TimerScene timerScene;
+    private final ProcessData processData;
     private JFrame frame;
     private JPanel scene;
     private GameData(int nDisks) {
@@ -68,9 +66,9 @@ public class GameData extends PropertyChangeSupport {
         this.frame = frame;
     }
 
-    public JFrame getFrame() {
-        return frame;
-    }
+//    public JFrame getFrame() {
+//        return frame;
+//    }
 
     public void recalculate() {
         if (nDisks == 0 || windowsWidth == 0 || windowHeight == 0) {
@@ -147,9 +145,9 @@ public class GameData extends PropertyChangeSupport {
         }
     }
 
-    public void setMoves(int moves) {
-        this.moves = moves;
-    }
+//    public void setMoves(int moves) {
+//        this.moves = moves;
+//    }
     public void repaint() {
         firePropertyChange("repaint", null, null);
     }
@@ -269,21 +267,27 @@ public class GameData extends PropertyChangeSupport {
         firePropertyChange("counter", null, counter);
         firePropertyChange("gameOver", null, gameOver);
     }
-    public JPanel getScene() {
-        return this.scene;
-    }
 
     public JPanel switchScene(Scene scene) {
         JPanel scenePanel = null;
         switch (scene) {
             case MENU:
                 System.out.println("Switching to menu scene");
-//                this.timerScene = new MenuPanel();
                 scenePanel = new MenuScene();
                 break;
             case TIMER:
                 System.out.println("Switching to timer scene");
                 scenePanel = new TimerScene();
+                break;
+            case STOPWATCH:
+                System.out.println("Switching to stopwatch scene");
+                scenePanel = new TimerScene();
+                break;
+            case MODE:
+                break;
+            case HELP:
+                System.out.println("Switching to help scene");
+                scenePanel = new HelpPanel();
                 break;
             default:
                 System.out.println("Invalid scene");
