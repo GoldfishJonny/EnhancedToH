@@ -1,9 +1,6 @@
 package com.team4;
 
-//import com.GoldfishJonny.MenuScene;
-//import com.team4.TimerScene;
 import org.json.JSONArray;
-
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeSupport;
@@ -66,10 +63,6 @@ public class GameData extends PropertyChangeSupport {
         this.frame = frame;
     }
 
-//    public JFrame getFrame() {
-//        return frame;
-//    }
-
     public void recalculate() {
         if (nDisks == 0 || windowsWidth == 0 || windowHeight == 0) {
             return;
@@ -111,11 +104,11 @@ public class GameData extends PropertyChangeSupport {
         this.selectedDisk = selectedDisk;
     }
 
-    public int getnDisks() {
+    public int getNDisks() {
         return nDisks;
     }
 
-    public void setnDisks(int nDisks) {
+    public void setNDisks(int nDisks) {
         this.nDisks = nDisks;
         this.recalculate();
     }
@@ -145,9 +138,6 @@ public class GameData extends PropertyChangeSupport {
         }
     }
 
-//    public void setMoves(int moves) {
-//        this.moves = moves;
-//    }
     public void repaint() {
         firePropertyChange("repaint", null, null);
     }
@@ -204,7 +194,7 @@ public class GameData extends PropertyChangeSupport {
 
     public int getProgress() {
         // Calculate the total number of moves required to solve the Tower of Hanoi puzzle
-        int totalMoves = (int) Math.pow(2, getnDisks()) - 1;
+        int totalMoves = (int) Math.pow(2, getNDisks()) - 1;
 
         // Calculate the current progress percentage
         double progressPercentage = (double) getMoves() / totalMoves * 100;
@@ -277,11 +267,11 @@ public class GameData extends PropertyChangeSupport {
                 break;
             case TIMER:
                 System.out.println("Switching to timer scene");
-                scenePanel = new TimerScene();
+                scenePanel = new StopwatchScene();
                 break;
             case STOPWATCH:
                 System.out.println("Switching to stopwatch scene");
-                scenePanel = new TimerScene();
+                scenePanel = new StopwatchScene();
                 break;
             case MODE:
                 break;

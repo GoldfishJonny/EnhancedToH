@@ -1,7 +1,10 @@
 package com.team4;
 
+import org.json.JSONObject;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 /**
  * The main class for the Towers of Hanoi game.
@@ -57,12 +60,27 @@ import java.awt.*;
         JPanel scene = GameData.getInstance().switchScene(Scene.MENU);
         setLayout(new BorderLayout());
         add(scene, BorderLayout.CENTER);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                File f = new File("data.json");
+                if (f.exists() && !f.isDirectory()) {
+                    if (f.delete()) {
+                        System.out.println("File deleted successfully");
+                    } else {
+                        System.out.println("Failed to delete the file");
+                    }
+                }
+                JSONObject data = new JSONObject();
+                GameData.getInstance().getProcessData().saveData(data);
+            }
+        });
     }
 
     public static void main(String[] args) {
         GameMain main = new GameMain();
         main.setTitle("Towers of Hanoi");
-        main.setSize(800, 400);
+        main.setExtendedState(JFrame.MAXIMIZED_BOTH);
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         main.setVisible(true);
     }

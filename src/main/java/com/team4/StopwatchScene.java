@@ -1,7 +1,5 @@
 package com.team4;
 
-import com.team4.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -10,13 +8,13 @@ import java.io.File;
 * It listens for changes in the game data and updates the display accordingly.
 * @author Jonathan Jara
 */
-public class TimerScene extends JPanel {
+public class StopwatchScene extends JPanel {
 
-    public TimerScene(){
+    public StopwatchScene(){
         TowerPanel towerPanel = new TowerPanel();
         TutorPanel tutorPanel = new TutorPanel();
-        ProgressPanel progressPanel = new ProgressPanel();
-        TimeTrialPanel timeTrial = new TimeTrialPanel(new TimeTrial());
+//        ProgressPanel progressPanel = new ProgressPanel();
+        TimeTrialPanel timeTrial = new TimeTrialPanel(new StopwatchMode());
 //        LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(new LeaderBoardManager());
 
 
@@ -49,7 +47,7 @@ public class TimerScene extends JPanel {
         towerPanel.addMouseMotionListener(controller);
         towerPanel.addComponentListener(controller);
 
-        GameData.getInstance().setnDisks(3);
+        GameData.getInstance().setNDisks(3);
         GameData.getInstance().setSize(getWidth(), getHeight());
         GameData.getInstance().addPropertyChangeListener(towerPanel);
 

@@ -55,7 +55,7 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
                         GameData.getInstance().setCounter(1);
                     }
                     GameData.getInstance().iterateMoves();
-                    if (GameData.getInstance().getTowers().get(2).getDisksOnTower().size() == GameData.getInstance().getnDisks()) {
+                    if (GameData.getInstance().getTowers().get(2).getDisksOnTower().size() == GameData.getInstance().getNDisks()) {
                         GameData.getInstance().setGameOver(true);
                     }
 

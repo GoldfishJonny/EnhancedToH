@@ -2,6 +2,8 @@ package com.team4;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class HelpPanel extends JPanel {
     public HelpPanel() {
@@ -36,8 +38,7 @@ public class HelpPanel extends JPanel {
         textPanel.add(textScrollPane, BorderLayout.CENTER);
 
         // Create and add the button
-        JButton backButton = new JButton("Back to Menu");
-        backButton.addActionListener(e -> System.out.println("Button clicked!"));
+        JButton backButton = new Button("Back To Menu", Color.BLACK, Color.WHITE, Scene.MENU);
         textPanel.add(backButton, BorderLayout.SOUTH); // Add button at the bottom
 
         // Add the text panel to the main panel

@@ -7,8 +7,8 @@ package com.team4;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimeTrial {
-    private Timer timer; 
+public class StopwatchMode {
+    private Timer timer;
     private long elapsedTime; 
     private boolean running;
     private LeaderBoardManager leaderBoardManager;
@@ -16,8 +16,8 @@ public class TimeTrial {
     /**
      * Constructs a TimeTrial object with initial values.
      */
-    public TimeTrial() {
-        timer = new Timer(); 
+    public StopwatchMode() {
+        timer = new Timer();
         elapsedTime = 0;
         running = false;
         leaderBoardManager = new LeaderBoardManager();
@@ -63,15 +63,6 @@ public class TimeTrial {
             elapsedTime = 0;
             start();
         }
-    }
-
-    /**
-     * Retrieves the elapsed time in milliseconds.
-     *
-     * @return The elapsed time in milliseconds.
-     */
-    public long getElapsedTime() {
-        return elapsedTime; // Return elapsed time
     }
 
     /**
