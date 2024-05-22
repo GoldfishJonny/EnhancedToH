@@ -2,6 +2,7 @@ package com.team4;
 
 import org.json.JSONArray;
 import javax.swing.*;
+import java.util.Timer;
 import java.awt.*;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -41,6 +42,19 @@ public class GameData extends PropertyChangeSupport {
     private final ProcessData processData;
     private JFrame frame;
     private JPanel scene;
+
+    private long bestTimeStopwatch = 0;
+    private long bestTimeTimer = 0;
+
+    private JLabel bestTimeLabel;
+    private JLabel timeLabel;
+    private boolean running;
+    private Mode mode;
+    private Timer timer;
+
+    private int elapsedTime;
+
+    private int selectedTime;
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
@@ -50,6 +64,7 @@ public class GameData extends PropertyChangeSupport {
         this.recalculate();
         this.solver = new Solver();
         this.processData = new ProcessData();
+        this.running = false;
     }
 
     public static GameData getInstance() {
@@ -262,28 +277,28 @@ public class GameData extends PropertyChangeSupport {
         JPanel scenePanel = null;
         switch (scene) {
             case MENU:
-                System.out.println("Switching to menu scene");
                 scenePanel = new MenuScene();
                 break;
             case TIMER:
-                System.out.println("Switching to timer scene");
-                scenePanel = new StopwatchScene();
+                elapsedTime = 20000;
+                selectedTime = 20000;
+                enableTimerMode();
+                scenePanel = new GameScene();
                 break;
             case STOPWATCH:
-                System.out.println("Switching to stopwatch scene");
-                scenePanel = new StopwatchScene();
+                elapsedTime = 0;
+                selectedTime = 0;
+                enableStopwatchMode();
+                scenePanel = new GameScene();
                 break;
             case MODE:
                 break;
             case HELP:
-                System.out.println("Switching to help scene");
                 scenePanel = new HelpPanel();
                 break;
             default:
-                System.out.println("Invalid scene");
                 break;
         }
-        System.out.println(scenePanel);
         this.scene = scenePanel;
         return scenePanel;
     }
@@ -294,5 +309,63 @@ public class GameData extends PropertyChangeSupport {
         this.frame.add(Scene, BorderLayout.CENTER);
         this.frame.revalidate();
         this.frame.repaint();
+    }
+    public void setBestTimeTimer(long bestTimeTimer) {
+        this.bestTimeTimer = bestTimeTimer;
+    }
+
+    public long getBestTimeTimer() {
+        return bestTimeTimer;
+    }
+
+    public void setBestTimeLabel(JLabel bestTimeLabel) {
+        this.bestTimeLabel = bestTimeLabel;
+    }
+
+    public JLabel getBestTimeLabel() {
+        return bestTimeLabel;
+    }
+
+    public boolean getRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public void enableTimerMode() {
+        this.timer = new Timer();
+        this.mode = new TimerMode();
+    }
+
+    public void enableStopwatchMode() {
+        this.timer = new Timer();
+        this.mode = new StopwatchMode();
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public int getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(int elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
+
+    public void resetElapsedTime() {
+        this.timer = new Timer();
+        this.elapsedTime = this.selectedTime;
     }
 }

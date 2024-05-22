@@ -3,7 +3,7 @@ package com.team4;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class StopwatchMode extends Mode{
+public class TimerMode extends Mode{
     @Override
     public void start() {
         GameData game = GameData.getInstance();
@@ -13,7 +13,7 @@ public class StopwatchMode extends Mode{
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    game.setElapsedTime(game.getElapsedTime() + 100);
+                    game.setElapsedTime(game.getElapsedTime() - 100);
                 }
             }, 0, 100);
             game.setRunning(true);

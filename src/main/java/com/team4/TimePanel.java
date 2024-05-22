@@ -10,34 +10,28 @@ import java.beans.PropertyChangeListener;
  * It listens for changes in the best time and updates the display accordingly.
  * It also listens for when the game starts and when it ends, to start and stop the timer.
  */
-public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
-    private final StopwatchMode timeTrial;
-    private final JLabel timeLabel;
-    private final JLabel bestTimeLabel;
-    private long time;
+public class TimePanel extends JPanel implements PropertyChangeListener {
+    private final Mode timeTrial;
 
     /**
      * Constructs a TimeTrialPanel with the specified TimeTrial instance.
      *
-     * @param timeTrial The TimeTrial instance to display and monitor for changes.
+     * @param mode The TimeTrial instance to display and monitor for changes.
      */
-    public TimeTrialPanel(StopwatchMode timeTrial) {
+    public TimePanel(Mode mode) {
 
-        this.timeTrial = timeTrial;
+        this.timeTrial = mode;
         setLayout(new GridLayout(2, 1));
 
         JPanel curTimePanel = new JPanel();
-        timeLabel = new JLabel("Time: 00:00.000");
-        timeLabel.setFont(new Font("Monaco", Font.BOLD, 20));
-        timeLabel.setForeground(Color.WHITE);
+        Label timeLabel = new Label("Time: 00:00.000", new Font("Monaco", Font.BOLD, 20), Color.WHITE);
         curTimePanel.setLayout(new GridBagLayout());
         curTimePanel.setBackground(Color.decode("0x508991"));
         curTimePanel.add(timeLabel);
 
         JPanel bestTimePanel = new JPanel();
-        bestTimeLabel = new JLabel("Best Time: 00:00.000");
-        bestTimeLabel.setFont(new Font("Monaco", Font.BOLD, 20));
-        bestTimeLabel.setForeground(Color.WHITE);
+        Label bestTimeLabel = new Label("Best Time: 00:00.000", new Font("Monaco", Font.BOLD, 20), Color.WHITE);
+        GameData.getInstance().setBestTimeLabel(bestTimeLabel);
         bestTimePanel.setLayout(new GridBagLayout());
         bestTimePanel.setBackground(Color.decode("0x004346"));
         bestTimePanel.add(bestTimeLabel);
@@ -52,19 +46,8 @@ public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
 
         GameData.getInstance().addPropertyChangeListener(this);
 
-        Timer timer = new Timer(100, e -> {
-            timeLabel.setText("Time: " + timeTrial.formatElapsedTime());
-        });
+        Timer timer = new Timer(100, e -> timeLabel.setText("Time: " + timeTrial.formatElapsedTime()));
         timer.start();
-    }
-
-    /**
-     * Returns the TimeTrial instance associated with this panel.
-     *
-     * @return The TimeTrial instance.
-     */
-    public StopwatchMode getTimeTrial() {
-        return this.timeTrial;
     }
 
     /**
@@ -80,6 +63,7 @@ public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
 
         if (evt.getPropertyName().equals("bestTime")) {
             long bestTime = (long) evt.getNewValue();
+            JLabel bestTimeLabel = GameData.getInstance().getBestTimeLabel();
             bestTimeLabel.setText("Best Time: " + GameData.getInstance().formatElapsedTime(bestTime));
         }
 
@@ -105,7 +89,7 @@ public class TimeTrialPanel extends JPanel implements PropertyChangeListener {
                 timeTrial.stop();
             }
             if (gameOver == 1) {
-                time = timeTrial.stop();
+                long time = timeTrial.stop();
                 GameData.getInstance().changeBestTime(time);
             }
         }

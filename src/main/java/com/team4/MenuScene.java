@@ -19,9 +19,6 @@ public class MenuScene extends JPanel {
         backgroundLabel.setLayout(new BorderLayout());
         backgroundLabel.setPreferredSize(new Dimension(backgroundImage.getIconWidth(), backgroundImage.getIconHeight())); // Set preferred size
         add(backgroundLabel, BorderLayout.CENTER);
-        //THIS DOESNT WORK BTW- Du lmao
-
-        // Panel for the buttons
         JPanel buttonPanel = createButtonPanel();
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -44,7 +41,6 @@ public class MenuScene extends JPanel {
         JButton helpButton = new Button("Help", Color.GREEN, Color.WHITE, Scene.HELP);
         buttonPanel.add(helpButton); // Add the help button to the buttonPanel
         buttonPanel.add(Box.createVerticalStrut(20));
-
         return buttonPanel;
     }
 }

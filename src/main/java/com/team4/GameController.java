@@ -6,7 +6,6 @@ import java.awt.event.*;
  * The controller for the Towers of Hanoi game.
  * It implements MouseListener, MouseMotionListener, and ComponentListener to handle mouse events and resizing.
  * It moves disks when dragged and dropped, and repaints the game when resized.
- *
  * Base code provided by Professor.
  * @Author Jonathan Jara
  *
@@ -16,7 +15,7 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
 
     private int initialX;
     private int initialY;
-    private ProgressPanel progressPanel;
+    private final ProgressPanel progressPanel;
 
     public GameController() {
         this.progressPanel = GameData.getInstance().getProgressPanel();
@@ -84,11 +83,7 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
     public void mouseDragged(MouseEvent e) {
         if (GameData.getInstance().getSelectedDisk() != null) {
             for (Tower tower : GameData.getInstance().getTowers()) {
-                if (tower.contains(e.getX(), e.getY())) {
-                    tower.setSelected(true);
-                } else {
-                    tower.setSelected(false);
-                }
+                tower.setSelected(tower.contains(e.getX(), e.getY()));
             }
             GameData.getInstance().getSelectedDisk().setDiskX(e.getX() - GameData.getInstance().getMouseXOffset());
             GameData.getInstance().getSelectedDisk().setDiskY(e.getY() - GameData.getInstance().getMouseYOffset());

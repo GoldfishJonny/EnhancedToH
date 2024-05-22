@@ -8,13 +8,14 @@ import java.io.File;
 * It listens for changes in the game data and updates the display accordingly.
 * @author Jonathan Jara
 */
-public class StopwatchScene extends JPanel {
+public class GameScene extends JPanel {
 
-    public StopwatchScene(){
+    public GameScene(){
+        GameData game = GameData.getInstance();
         TowerPanel towerPanel = new TowerPanel();
         TutorPanel tutorPanel = new TutorPanel();
 //        ProgressPanel progressPanel = new ProgressPanel();
-        TimeTrialPanel timeTrial = new TimeTrialPanel(new StopwatchMode());
+        TimePanel timeTrial = new TimePanel(game.getMode());
 //        LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(new LeaderBoardManager());
 
 
@@ -41,7 +42,6 @@ public class StopwatchScene extends JPanel {
 
         add(bottomPanel, BorderLayout.CENTER);
 
-        // Setup interactions
         GameController controller = new GameController();
         towerPanel.addMouseListener(controller);
         towerPanel.addMouseMotionListener(controller);
@@ -57,7 +57,6 @@ public class StopwatchScene extends JPanel {
             GameData.getInstance().getProcessData().loadData();
         }
 
-        // Refresh the UI
         revalidate();
         repaint();
 
