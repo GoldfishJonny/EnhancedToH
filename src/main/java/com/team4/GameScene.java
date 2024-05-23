@@ -14,7 +14,6 @@ public class GameScene extends JPanel {
         GameData game = GameData.getInstance();
         TowerPanel towerPanel = new TowerPanel();
         TutorPanel tutorPanel = new TutorPanel();
-        ProgressPanel progressPanel = new ProgressPanel();
         TimePanel timeTrial = new TimePanel(game.getMode());
         LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(new LeaderBoardManager());
 
@@ -27,7 +26,6 @@ public class GameScene extends JPanel {
         bottomPanel.setLayout(new GridLayout(1,2));
         rightPanel.setLayout(new GridLayout(2,1));
         rightPanel.setBackground(Color.WHITE);
-        leftPanel.setLayout(new GridLayout(2,1));
 
         towerPanel.setBackground(Color.decode("#EFF7F6"));
         leftPanel.setBackground(Color.decode("#EFF7F6"));

@@ -54,8 +54,8 @@ public class ProgressPanel extends JPanel {
         g.fillRect(0, 0, barWidth, getHeight());
     }
 
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(200, 20); // Adjust panel size as needed
-    }
+//    @Override
+//    public Dimension getPreferredSize() {
+//        return new Dimension(200, 20); // Adjust panel size as needed
+//    }
 }
