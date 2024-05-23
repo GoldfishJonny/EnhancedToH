@@ -24,7 +24,7 @@ import java.io.File;
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                File f = new File("data.json");
+                File f = new File("Users"+ File.separator + "data.json");
                 if (f.exists() && !f.isDirectory()) {
                     if (f.delete()) {
                         System.out.println("File deleted successfully");
@@ -44,5 +44,11 @@ import java.io.File;
         main.setExtendedState(JFrame.MAXIMIZED_BOTH);
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         main.setVisible(true);
+        File f = new File("Users");
+        if (!f.exists() || !f.isDirectory()) {
+            if (!f.mkdir()){
+                System.out.println("Failed to create Users directory");
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ public class ProcessData {
         data.put("Top Scores Timer", GameData.getInstance().getTopScoresTimer());
         data.put("Top Scores Stopwatch", GameData.getInstance().getTopScoresStopwatch());
         System.out.println("Data saved to database");
-        try (FileWriter file = new FileWriter("data.json")) {
+        try (FileWriter file = new FileWriter("Users"+File.separator +"data.json")) {
             file.write(data.toString());
             file.flush();
         } catch (Exception e) {
@@ -25,11 +25,11 @@ public class ProcessData {
     }
 
     public void loadData() {
-        File f = new File("data.json");
+        File f = new File("Users/data.json");
         if (!f.exists() || f.isDirectory()) {
             return;
         }
-        try (FileReader reader = new FileReader("data.json")) {
+        try (FileReader reader = new FileReader("Users"+File.separator+"data.json")) {
             // Read data from database
             JSONTokener jsonParser = new JSONTokener(reader);
             JSONObject data = new JSONObject(jsonParser);

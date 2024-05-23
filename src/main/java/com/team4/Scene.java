@@ -9,5 +9,6 @@ public enum Scene {
     MODE,
     TIMER,
     STOPWATCH,
+    GAME,
     HELP
 }

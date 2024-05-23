@@ -26,7 +26,7 @@ public class Tutor {
         }
     }
     public NewDisk getDisk() {
-        NewDisk dis = GameData.getInstance().getNewDisks().get(2-disk);
+        NewDisk dis = GameData.getInstance().getNewDisks().get(GameData.getInstance().getNDisks()-1-disk);
         return dis;
     }
 

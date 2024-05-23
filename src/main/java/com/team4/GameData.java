@@ -203,7 +203,7 @@ public class GameData extends PropertyChangeSupport {
     public int[] getDisks() {
         int[] n = new int[nDisks];
         for (int i = 0; i < nDisks; i++) {
-            n[2 - i] = disks.get(i).getTower().getID();
+            n[getNDisks()-1 - i] = disks.get(i).getTower().getID();
         }
         return n;
     }
@@ -335,21 +335,22 @@ public class GameData extends PropertyChangeSupport {
                 scenePanel = new MenuScene();
                 break;
             case TIMER:
-                elapsedTime = 20000;
-                selectedTime = 20000;
                 enableTimerMode();
-                scenePanel = new GameScene();
+                scenePanel = new LevelScene();
                 break;
             case STOPWATCH:
                 elapsedTime = 0;
                 selectedTime = 0;
                 enableStopwatchMode();
-                scenePanel = new GameScene();
+                scenePanel = new LevelScene();
                 break;
             case MODE:
                 break;
             case HELP:
                 scenePanel = new HelpPanel();
+                break;
+            case GAME:
+                scenePanel = new GameScene();
                 break;
             default:
                 break;
@@ -422,5 +423,14 @@ public class GameData extends PropertyChangeSupport {
     public void resetElapsedTime() {
         this.timer = new Timer();
         this.elapsedTime = this.selectedTime;
+    }
+
+    public void setSelectedTime(int selectedTime) {
+        this.elapsedTime = selectedTime;
+        this.selectedTime = selectedTime;
+    }
+
+    public int getSelectedTime() {
+        return selectedTime;
     }
 }
