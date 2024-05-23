@@ -90,6 +90,12 @@ public class TimePanel extends JPanel implements PropertyChangeListener {
             }
             if (gameOver == 1) {
                 long time = timeTrial.stop();
+                if (GameData.getInstance().getMode() instanceof TimerMode) {
+                    GameData.getInstance().addTopScoreTimer(time);
+                }
+                if (GameData.getInstance().getMode() instanceof StopwatchMode) {
+                    GameData.getInstance().addTopScoreStopwatch(time);
+                }
                 GameData.getInstance().changeBestTime(time);
             }
         }

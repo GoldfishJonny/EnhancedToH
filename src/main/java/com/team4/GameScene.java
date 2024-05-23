@@ -14,9 +14,9 @@ public class GameScene extends JPanel {
         GameData game = GameData.getInstance();
         TowerPanel towerPanel = new TowerPanel();
         TutorPanel tutorPanel = new TutorPanel();
-//        ProgressPanel progressPanel = new ProgressPanel();
+        ProgressPanel progressPanel = new ProgressPanel();
         TimePanel timeTrial = new TimePanel(game.getMode());
-//        LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(new LeaderBoardManager());
+        LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(new LeaderBoardManager());
 
 
         JPanel rightPanel = new JPanel(new BorderLayout());
@@ -35,7 +35,7 @@ public class GameScene extends JPanel {
         leftPanel.add(timeTrial);
 
         rightPanel.add(tutorPanel);
-//        rightPanel.add(leaderboardPanel);
+        rightPanel.add(leaderboardPanel);
 
         bottomPanel.add(leftPanel);
         bottomPanel.add(rightPanel);

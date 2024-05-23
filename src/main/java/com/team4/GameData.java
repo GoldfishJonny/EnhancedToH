@@ -55,6 +55,11 @@ public class GameData extends PropertyChangeSupport {
     private int elapsedTime;
 
     private int selectedTime;
+
+    private List<Long> topScoresTimer;
+    private List<Long> topScoresStopwatch;
+
+    private String username = "Player";
     private GameData(int nDisks) {
         super(new Object());
         this.nDisks = nDisks;
@@ -65,6 +70,8 @@ public class GameData extends PropertyChangeSupport {
         this.solver = new Solver();
         this.processData = new ProcessData();
         this.running = false;
+        this.topScoresTimer = new ArrayList<>();
+        this.topScoresStopwatch = new ArrayList<>();
     }
 
     public static GameData getInstance() {
@@ -101,6 +108,60 @@ public class GameData extends PropertyChangeSupport {
             towers.get(0).setDisksOnTower(disks.get(i));
         }
         repaint();
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setTopScoresTimer(JSONArray topScoresTimer) {
+        for (int i = 0; i < topScoresTimer.length(); i++) {
+            this.topScoresTimer.add(topScoresTimer.getLong(i));
+        }
+    }
+
+    public List<Long> getTopScoresTimer() {
+        return topScoresTimer;
+    }
+
+    public void addTopScoreTimer(long score) {
+        if (topScoresTimer.size() < 5) {
+            topScoresTimer.add(score);
+        } else {
+            for (int i = 0; i < topScoresTimer.size(); i++) {
+                if (score < topScoresTimer.get(i)) {
+                    topScoresTimer.set(i, score);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void addTopScoreStopwatch(long score) {
+        if (topScoresStopwatch.size() < 5) {
+            topScoresStopwatch.add(score);
+        } else {
+            for (int i = 0; i < topScoresStopwatch.size(); i++) {
+                if (score < topScoresStopwatch.get(i)) {
+                    topScoresStopwatch.set(i, score);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void setTopScoresStopwatch(JSONArray topScoresStopwatch) {
+        for (int i = 0; i < topScoresStopwatch.length(); i++) {
+            this.topScoresStopwatch.add(topScoresStopwatch.getLong(i));
+        }
+    }
+
+    public List<Long> getTopScoresStopwatch() {
+        return topScoresStopwatch;
     }
 
     public List<Tower> getTowers() {
@@ -145,12 +206,6 @@ public class GameData extends PropertyChangeSupport {
             n[2 - i] = disks.get(i).getTower().getID();
         }
         return n;
-    }
-
-    public void setDisks(JSONArray n) {
-        for (int i = 0; i < nDisks; i++) {
-            disks.get(i).setTower(towers.get(n.getInt(i)));
-        }
     }
 
     public void repaint() {
