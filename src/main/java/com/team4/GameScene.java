@@ -15,7 +15,7 @@ public class GameScene extends JPanel {
         TowerPanel towerPanel = new TowerPanel();
         TutorPanel tutorPanel = new TutorPanel();
         TimePanel timeTrial = new TimePanel(game.getMode());
-        LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(new LeaderBoardManager());
+        LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(LeaderBoardManager.getInstance());
 
 
         JPanel rightPanel = new JPanel(new BorderLayout());
@@ -59,4 +59,6 @@ public class GameScene extends JPanel {
         repaint();
 
     }
+
+    
 }

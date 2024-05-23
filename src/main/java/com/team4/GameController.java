@@ -56,6 +56,9 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
                     GameData.getInstance().iterateMoves();
                     if (GameData.getInstance().getTowers().get(2).getDisksOnTower().size() == GameData.getInstance().getNDisks()) {
                         GameData.getInstance().setGameOver(true);
+                        // Call to update the leaderboard if the game is over
+                        String formattedTime = GameData.getInstance().getFormattedTime(); // Assuming this method exists
+                        LeaderBoardManager.getInstance().addTime(formattedTime);
                     }
 
                     if (tower != oldTower) {

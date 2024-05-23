@@ -14,6 +14,16 @@ import java.util.List;
  *
  */
 public class LeaderBoardManager {
+    private static LeaderBoardManager instance;
+
+    public LeaderBoardManager() {}
+
+    public static LeaderBoardManager getInstance() {
+        if (instance == null) {
+            instance = new LeaderBoardManager();
+        }
+        return instance;
+    }
     private static final String FILE_NAME = "leaderboard.txt";
     private List<LeaderBoardObserver> observers = new ArrayList<>();
 
@@ -25,7 +35,7 @@ public class LeaderBoardManager {
         observers.add(observer);
     }
 
-    private void notifyObservers() {
+    void notifyObservers() {
         for (LeaderBoardObserver observer : observers) {
             observer.onUpdate();
         }
@@ -44,6 +54,7 @@ public class LeaderBoardManager {
 
     public List<String> getTopTimes(int numberOfTopTimes) {
         List<String> times = new ArrayList<>();
+        // Ensure file is re-read each time
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -56,4 +67,5 @@ public class LeaderBoardManager {
         Collections.sort(times);
         return times.size() <= numberOfTopTimes ? times : times.subList(0, numberOfTopTimes);
     }
+
 }

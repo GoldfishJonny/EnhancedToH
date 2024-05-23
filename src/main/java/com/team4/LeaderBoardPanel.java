@@ -16,14 +16,14 @@ public class LeaderBoardPanel extends JPanel implements LeaderBoardManager.Leade
     public LeaderBoardPanel(LeaderBoardManager manager) {
         this.leaderBoardManager = manager;
         this.leaderBoardManager.addObserver(this); // Register as observer
-        setBorder(BorderFactory.createTitledBorder("Top 5 Scores"));
+        setBorder(BorderFactory.createTitledBorder("Top 10 Scores"));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         updateScores();
     }
 
     public void updateScores() {
         removeAll(); // Remove all previous score labels
-        List<String> topScores = leaderBoardManager.getTopTimes(5);
+        List<String> topScores = leaderBoardManager.getTopTimes(10);
         for (String score : topScores) {
             add(new JLabel(score));
         }

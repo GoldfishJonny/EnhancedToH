@@ -326,6 +326,7 @@ public class GameData extends PropertyChangeSupport {
         firePropertyChange("moves", null, moves);
         firePropertyChange("counter", null, counter);
         firePropertyChange("gameOver", null, gameOver);
+        LeaderBoardManager.getInstance().notifyObservers();
     }
 
     public JPanel switchScene(Scene scene) {
@@ -428,6 +429,15 @@ public class GameData extends PropertyChangeSupport {
     public void setSelectedTime(int selectedTime) {
         this.elapsedTime = selectedTime;
         this.selectedTime = selectedTime;
+    }
+
+    public String getFormattedTime() {
+        long elapsedTimeMillis = getElapsedTime();
+        long minutes = elapsedTimeMillis / 60000;
+        long seconds = (elapsedTimeMillis / 1000) % 60;
+        long milliseconds = elapsedTimeMillis % 1000;
+
+        return String.format("%02d:%02d:%03d", minutes, seconds, milliseconds);
     }
 
     public int getSelectedTime() {
