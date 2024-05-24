@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 /**
-* TimerScene represents a JPanel that displays the game scene with the timer and the tutor.
-* It listens for changes in the game data and updates the display accordingly.
-* @author Jonathan Jara
-*/
+ * TimerScene represents a JPanel that displays the game scene with the timer and the tutor.
+ * It listens for changes in the game data and updates the display accordingly.
+ * @author Jonathan Jara
+ */
 public class GameScene extends JPanel {
 
     public GameScene(){
@@ -16,9 +16,7 @@ public class GameScene extends JPanel {
         TutorPanel tutorPanel = new TutorPanel();
         TimePanel timeTrial = new TimePanel(game.getMode());
         LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(LeaderBoardManager.getInstance());
-        Currency currency = new Currency(10);
         CoinPanel coinPanel = new CoinPanel();
-
 
         JPanel rightPanel = new JPanel(new BorderLayout());
         JPanel leftPanel = new JPanel(new GridLayout(2, 1));
@@ -64,5 +62,5 @@ public class GameScene extends JPanel {
 
     }
 
-    
+
 }

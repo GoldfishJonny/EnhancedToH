@@ -8,7 +8,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class TowerPanel extends JPanel implements PropertyChangeListener {
-    private ProgressPanel progressPanel;
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -22,6 +22,7 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
     }
     private JButton restartButton;
     private JButton shopButton;
+    private Currency currency;
 
     public TowerPanel() {
         setBackground(Color.decode("#EFF7F6"));
@@ -30,7 +31,7 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
 
     private void initializeComponents() {
         setBackground(Color.decode("#EFF7F6"));
-        progressPanel = new ProgressPanel();
+        currency = new Currency(); // Initialize the Currency object
 
         // Initialize the shop button
         shopButton = new JButton("Shop");
@@ -49,11 +50,6 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 // Call the method to restart the game from GameData
                 GameData.getInstance().restart();
-                if (progressPanel != null) {
-                    progressPanel.stopAnimation();
-                    progressPanel.updateProgress(0); // Reset progress to 0
-                }
-                // Repaint the panel to reflect the changes
                 repaint();
             }
         });
@@ -145,10 +141,13 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("gameOver")) {
+            int gameOver = (int) evt.getNewValue();
+            if (gameOver == 1) {
+                // Game is over, add 100 coins to the user's currency balance
+                currency.addCoins(100);
+            }
+        }
         repaint();
-    }
-
-    public void setProgressPanel(ProgressPanel progressPanel) {
-        this.progressPanel = progressPanel;
     }
 }

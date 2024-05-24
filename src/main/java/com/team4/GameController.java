@@ -17,10 +17,8 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
 
     private int initialX;
     private int initialY;
-    private final ProgressPanel progressPanel;
 
     public GameController() {
-        this.progressPanel = GameData.getInstance().getProgressPanel();
     }
 
     public void mousePressed(MouseEvent e) {
@@ -73,12 +71,6 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
                         QuickStart qs = new QuickStart();
                         qs.loadDataFromFile("Users/data.json");
                         qs.close();
-                    }
-
-                    if (tower != oldTower) {
-                        System.out.println("Progress update triggered");
-                        progressPanel.updateProgress(GameData.getInstance().getProgress());
-                        System.out.println("Current progress: " + GameData.getInstance().getProgress());
                     }
 
                 }
