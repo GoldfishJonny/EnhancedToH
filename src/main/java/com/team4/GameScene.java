@@ -16,6 +16,8 @@ public class GameScene extends JPanel {
         TutorPanel tutorPanel = new TutorPanel();
         TimePanel timeTrial = new TimePanel(game.getMode());
         LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(LeaderBoardManager.getInstance());
+        Currency currency = new Currency(10);
+        CoinPanel coinPanel = new CoinPanel();
 
 
         JPanel rightPanel = new JPanel(new BorderLayout());
@@ -39,6 +41,8 @@ public class GameScene extends JPanel {
         bottomPanel.add(rightPanel);
 
         add(bottomPanel, BorderLayout.CENTER);
+
+        add(coinPanel, BorderLayout.NORTH);
 
         GameController controller = new GameController();
         towerPanel.addMouseListener(controller);
