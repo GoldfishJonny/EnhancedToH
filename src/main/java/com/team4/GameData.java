@@ -392,6 +392,16 @@ public class GameData extends PropertyChangeSupport {
         return mode;
     }
 
+//    // Getter for backdrop image
+//    public String getBackdropImage() {
+//        return backdropImage;
+//    }
+//
+//    // Setter for backdrop image
+//    public void setBackdropImage(String backdropImage) {
+//        this.backdropImage = backdropImage;
+//    }
+
     public Timer getTimer() {
         return timer;
     }
