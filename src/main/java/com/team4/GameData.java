@@ -33,6 +33,9 @@ public class GameData extends PropertyChangeSupport {
     private long bestTime = 0;
     private int counter = 0;
 
+    private Currency currency;
+    private CoinPanel coinPanel;
+
     private int moves = 0;
     private Solver solver;
     private NewDisk askedForHelpD = null;
@@ -442,6 +445,11 @@ public class GameData extends PropertyChangeSupport {
         long milliseconds = elapsedTimeMillis % 1000;
 
         return String.format("%02d:%02d:%03d", minutes, seconds, milliseconds);
+    }
+
+    public void completeTowerOfHanoi() {
+        currency.addCoins(100);
+        coinPanel.updateCoins(currency.getCoins());
     }
 
     public int getSelectedTime() {
