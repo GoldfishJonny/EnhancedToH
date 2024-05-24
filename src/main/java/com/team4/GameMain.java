@@ -36,6 +36,8 @@ import java.io.File;
                 GameData.getInstance().getProcessData().saveData(data);
             }
         });
+        //QuickStart qs = new QuickStart();
+        //qs.loadDataFromFile("Users/data.json");
     }
 
     public static void main(String[] args) {

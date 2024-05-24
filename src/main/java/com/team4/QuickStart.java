@@ -20,39 +20,61 @@ import java.io.Reader;
  * @author Du Tran
  */
 public class QuickStart {
+    private MongoClient client;
+    private MongoDatabase db;
+    private MongoCollection<Document> col;
 
+    /*
     public static void main(String[] args) {
-        /*
         String connectionString = System.getenv("MONGO_DB_URI");
         if (connectionString == null || connectionString.isEmpty()) {
             System.err.println("No MongoDB connection string provided!");
             return;
         }
          */
+    public QuickStart() {
+            this.client = MongoClients.create("mongodb+srv://dutranpgm:tAZowHn5EzpmXY3c@sample.68tcera.mongodb.net/?retryWrites=true&w=majority&appName=Sample");
+            this.db = client.getDatabase("SampleDB");
+            this.col = db.getCollection("SampleC");
+        }
 
-        MongoClient client = MongoClients.create("mongodb+srv://dutranpgm:tAZowHn5EzpmXY3c@sample.68tcera.mongodb.net/?retryWrites=true&w=majority&appName=Sample");
-
-        MongoDatabase db = client.getDatabase("SampleDB");
-        MongoCollection<Document> col = db.getCollection("SampleC");
-
+        /*
         Document sampleDoc = new Document("_id", "1").append("name", "John Smith");
         Document userDoc = new Document("username", "playerOne")
                 .append("highscore1", 5000)
                 .append("highscore2", 3200);
+         */
 
-        // Read and parse JSON file
-        try (Reader reader = new FileReader("Users/data.json")) {
+
+    public void loadDataFromFile (String filePath){
+        try (Reader reader = new FileReader(filePath)) {
             Gson gson = new Gson();
             JsonObject json = gson.fromJson(reader, JsonObject.class);
-            insertDataFromJson(col, json);
+            insertDataFromJson(json);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        readAllDocuments(col);
-        client.close();
     }
 
+    private void insertDataFromJson (JsonObject json){
+        Document doc = Document.parse(json.toString());
+        try {
+            col.insertOne(doc);
+        } catch (MongoWriteException e) {
+            if (e.getError().getCode() == 11000) {
+                System.out.println("A document with the same _id already exists.");
+            } else {
+                throw e;
+            }
+        }
+    }
+
+    private static void readAllDocuments(MongoCollection<Document> collection) {
+        FindIterable<Document> documents = collection.find();
+        for (Document doc : documents) {
+            System.out.println(doc.toJson());
+        }
+    }
         /*
         try {
             col.insertOne(sampleDoc);
@@ -69,27 +91,10 @@ public class QuickStart {
     }
 
          */
-
-    private static void insertDataFromJson(MongoCollection<Document> collection, JsonObject json) {
-        Document doc = Document.parse(json.toString());
-        try {
-            collection.insertOne(doc);
-        } catch (MongoWriteException e) {
-            if (e.getError().getCode() == 11000) {
-                System.out.println("A document with the same _id already exists.");
-            } else {
-                throw e;
-            }
+        public void close() {
+            client.close();
         }
     }
-
-    private static void readAllDocuments(MongoCollection<Document> collection) {
-        FindIterable<Document> documents = collection.find();
-        for (Document doc : documents) {
-            System.out.println(doc.toJson());
-        }
-    }
-}
 
     /*
     I guess the idea now is that when something is added to the data.json file it's also pushed onto the DB

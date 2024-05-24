@@ -327,6 +327,10 @@ public class GameData extends PropertyChangeSupport {
         firePropertyChange("counter", null, counter);
         firePropertyChange("gameOver", null, gameOver);
         LeaderBoardManager.getInstance().notifyObservers();
+        //QuickStart qs = new QuickStart();
+        //qs.loadDataFromFile("Users/data.json");
+        //qs.readAllDocuments();
+        //qs.close();
     }
 
     public JPanel switchScene(Scene scene) {

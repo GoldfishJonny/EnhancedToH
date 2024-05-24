@@ -1,6 +1,8 @@
 package com.team4;
 
 
+import org.json.JSONObject;
+
 import java.awt.event.*;
 /**
  * The controller for the Towers of Hanoi game.
@@ -56,9 +58,21 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
                     GameData.getInstance().iterateMoves();
                     if (GameData.getInstance().getTowers().get(2).getDisksOnTower().size() == GameData.getInstance().getNDisks()) {
                         GameData.getInstance().setGameOver(true);
+
                         // Call to update the leaderboard if the game is over
                         String formattedTime = GameData.getInstance().getFormattedTime(); // Assuming this method exists
                         LeaderBoardManager.getInstance().addTime(formattedTime);
+                        //LeaderBoardManager.getInstance().notifyObservers(); //adds time to leaderboard when game ends
+                        /// ^ Didnt work lmaoooo
+
+                        //When game is complete it updates the data.json file
+                        JSONObject data = new JSONObject();
+                        GameData.getInstance().getProcessData().saveData(data);
+
+                        // Exports info from data.json to mongodb
+                        QuickStart qs = new QuickStart();
+                        qs.loadDataFromFile("Users/data.json");
+                        qs.close();
                     }
 
                     if (tower != oldTower) {
