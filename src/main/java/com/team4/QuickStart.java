@@ -100,4 +100,10 @@ public class QuickStart {
     I guess the idea now is that when something is added to the data.json file it's also pushed onto the DB
     I think maybe how this run everything the game ends and it just scans through the entire json file and adds
     non-duplicates to the DB?
+
+    things needed:
+    1. Make sure it can read data from MongoDB
+    2. Create a way to keep the top 5 scores in the data.json file (it only does the first 5 scores in no order)
+    3. Make a way to have different users
+    4. Figure out how to pull based on username and avoid duplicate username pulls i guess?
      */
