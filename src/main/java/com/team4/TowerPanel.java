@@ -78,40 +78,55 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
         });
 
         JLabel shopItemsLabel = new JLabel("Tom's Shop");
-        JButton item1Button = new JButton("Turn Disks Red");
-        JButton item2Button = new JButton("Turn Disks Blue");
-        JButton item3Button = new JButton("Turn Disks Green");
+        JButton item1Button = new JButton("Turn Disks Red (10 coins)");
+        JButton item2Button = new JButton("Turn Disks Blue (10 coins)");
+        JButton item3Button = new JButton("Turn Disks Green (10 coins)");
 
         item1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Change all disks to red
-                for (NewDisk disk : GameData.getInstance().getNewDisks()) {
-                    disk.setColor(Color.RED);
+                // Deduct coins and change disk color if user has enough coins
+                if (Currency.getInstance().getCoins() >= 10) {
+                    Currency.getInstance().deductCoins(10);
+                    for (NewDisk disk : GameData.getInstance().getNewDisks()) {
+                        disk.setColor(Color.RED);
+                    }
+                    repaint();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Insufficient coins!", "Shop", JOptionPane.WARNING_MESSAGE);
                 }
-                repaint();
             }
         });
 
         item2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Change all disks to blue
-                for (NewDisk disk : GameData.getInstance().getNewDisks()) {
-                    disk.setColor(Color.BLUE);
+                // Deduct coins and change disk color if user has enough coins
+                if (Currency.getInstance().getCoins() >= 10) {
+                    Currency.getInstance().deductCoins(10);
+                    for (NewDisk disk : GameData.getInstance().getNewDisks()) {
+                        disk.setColor(Color.BLUE);
+                    }
+                    repaint();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Insufficient coins!", "Shop", JOptionPane.WARNING_MESSAGE);
                 }
-                repaint();
             }
         });
 
         item3Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Change all disks to green
-                for (NewDisk disk : GameData.getInstance().getNewDisks()) {
-                    disk.setColor(Color.GREEN);
+                // Deduct coins and change disk color if user has enough coins
+                if (Currency.getInstance().getCoins() >= 10) {
+                    Currency.getInstance().deductCoins(10);
+                    for (NewDisk disk : GameData.getInstance().getNewDisks()) {
+                        disk.setColor(Color.GREEN);
+                    }
+                    repaint();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Insufficient coins!", "Shop", JOptionPane.WARNING_MESSAGE);
                 }
-                repaint();
             }
         });
 

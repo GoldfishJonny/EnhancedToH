@@ -23,19 +23,42 @@ public class Currency {
 
     public void setCoins(int coins) {
         this.coins = coins;
-        if (coinPanel != null) {
-            coinPanel.updateCoins(coins);
-        }
+//        if (coinPanel != null) {
+//            coinPanel.updateCoins(coins);
+//        }
+        updateCoinPanel();
     }
 
     public void addCoins(int amount) {
         coins += amount;
-        if (coinPanel != null) {
-            coinPanel.updateCoins(coins);
-        }
+//        if (coinPanel != null) {
+//            coinPanel.updateCoins(coins);
+//        }
+        updateCoinPanel();
     }
 
     public void setCoinPanel(CoinPanel coinPanel) {
         this.coinPanel = coinPanel;
+        updateCoinPanel();
+    }
+
+    public void deductCoins(int amount) {
+//        if (coins >= amount) {
+//            coins -= amount;
+//        } else {
+//            System.out.println("Insufficient coins!");
+//        }
+        if (coins >= amount) {
+            coins -= amount;
+            updateCoinPanel();
+        } else {
+            System.out.println("Insufficient coins!");
+        }
+    }
+
+    private void updateCoinPanel() {
+        if (coinPanel != null) {
+            coinPanel.updateCoins(coins);
+        }
     }
 }
