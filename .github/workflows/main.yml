@@ -28,9 +28,9 @@ jobs:
     - name: Just for Fun an LS
       run: ls -al target
     - name: Set Executable Permissions
-      run: chmod +x target/toh-1.0.jar
+      run: chmod +x target/TowerOfHanoi.jar
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: towerOfHanoi
-        path: target/toh-1.0.jar
+        path: target/TowerOfHanoi.jar
