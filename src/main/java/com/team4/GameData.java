@@ -264,17 +264,6 @@ public class GameData extends PropertyChangeSupport {
         return moves;
     }
 
-//    public int getProgress() {
-//        // Calculate the total number of moves required to solve the Tower of Hanoi puzzle
-//        int totalMoves = (int) Math.pow(2, getNDisks()) - 1;
-//
-//        // Calculate the current progress percentage
-//        double progressPercentage = (double) getMoves() / totalMoves * 100;
-//
-//        // Ensure the progress percentage is within the range [0, 100]
-//        return (int) Math.round(progressPercentage);
-//    }
-
     public ProcessData getProcessData() {
         return processData;
     }
@@ -436,11 +425,6 @@ public class GameData extends PropertyChangeSupport {
         long milliseconds = elapsedTimeMillis % 1000;
 
         return String.format("%02d:%02d:%03d", minutes, seconds, milliseconds);
-    }
-
-    public void completeTowerOfHanoi() {
-        currency.addCoins(100);
-        coinPanel.updateCoins(currency.getCoins());
     }
 
     public int getSelectedTime() {
