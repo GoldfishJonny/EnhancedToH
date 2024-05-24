@@ -17,6 +17,7 @@ public class GameScene extends JPanel {
         TimePanel timeTrial = new TimePanel(game.getMode());
         LeaderBoardPanel leaderboardPanel = new LeaderBoardPanel(LeaderBoardManager.getInstance());
         CoinPanel coinPanel = new CoinPanel();
+        Currency.getInstance().setCoinPanel(coinPanel);
 
         JPanel rightPanel = new JPanel(new BorderLayout());
         JPanel leftPanel = new JPanel(new GridLayout(2, 1));
