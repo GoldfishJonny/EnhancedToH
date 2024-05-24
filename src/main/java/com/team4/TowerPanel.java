@@ -22,7 +22,6 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
     }
     private JButton restartButton;
     private JButton shopButton;
-    private Currency currency;
 
     public TowerPanel() {
         setBackground(Color.decode("#EFF7F6"));
@@ -31,7 +30,6 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
 
     private void initializeComponents() {
         setBackground(Color.decode("#EFF7F6"));
-        currency = new Currency(); // Initialize the Currency object
 
         // Initialize the shop button
         shopButton = new JButton("Shop");
@@ -79,10 +77,10 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
             }
         });
 
-        JLabel shopItemsLabel = new JLabel("Shop Items");
-        JButton item1Button = new JButton("Item 1");
-        JButton item2Button = new JButton("Item 2");
-        JButton item3Button = new JButton("Item 3");
+        JLabel shopItemsLabel = new JLabel("Tom's Shop");
+        JButton item1Button = new JButton("Turn Disks Red");
+        JButton item2Button = new JButton("Turn Disks Blue");
+        JButton item3Button = new JButton("Turn Disks Green");
 
         item1Button.addActionListener(new ActionListener() {
             @Override
@@ -141,13 +139,6 @@ public class TowerPanel extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("gameOver")) {
-            int gameOver = (int) evt.getNewValue();
-            if (gameOver == 1) {
-                // Game is over, add 100 coins to the user's currency balance
-                currency.addCoins(100);
-            }
-        }
         repaint();
     }
 }

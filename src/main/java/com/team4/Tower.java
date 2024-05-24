@@ -24,6 +24,7 @@ public class Tower {
         disk.setDiskY(y - (disksOnTower.size() + 1) * 20);
         disksOnTower.add(disk);
         soundManager.playDropSound();
+        Currency.getInstance().addCoins(10);
     }
 
     public void removeDisk(NewDisk disk) {

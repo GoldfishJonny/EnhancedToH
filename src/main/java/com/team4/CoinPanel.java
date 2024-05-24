@@ -4,19 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CoinPanel extends JPanel {
-    private JLabel coinLabel;
+    private JLabel coinsLabel;
 
     public CoinPanel() {
-        coinLabel = new JLabel("Coins: 0");
-        coinLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        coinLabel.setForeground(Color.YELLOW);
+        initializeComponents();
+    }
 
-        setBackground(Color.BLACK);
-        setLayout(new FlowLayout(FlowLayout.RIGHT));
-        add(coinLabel);
+    private void initializeComponents() {
+        setBackground(Color.decode("#EFF7F6"));
+        coinsLabel = new JLabel("Coins: 0");
+        coinsLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        add(coinsLabel);
     }
 
     public void updateCoins(int coins) {
-        coinLabel.setText("Coins: " + coins);
+        coinsLabel.setText("Coins: " + coins);
     }
 }
