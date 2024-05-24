@@ -21,7 +21,7 @@ public class ProcessDataTest {
         JSONObject data = new JSONObject();
         processData.saveData(data);
         assertEquals("Data saved to database", "Data saved to database");
-        assertEquals(data.toString(), "{\"Disks\":[],\"Best Time\":10}");
+        assertEquals(data.toString(), "{\"Top Scores Timer\":[],\"Username\":\"Player\",\"Top Scores Stopwatch\":[]}");
     }
 
     @Test
