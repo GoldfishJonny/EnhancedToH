@@ -48,7 +48,7 @@ public class GameScene extends JPanel {
         towerPanel.addMouseMotionListener(controller);
         towerPanel.addComponentListener(controller);
 
-        GameData.getInstance().setNDisks(3);
+        //GameData.getInstance().setNDisks(3);
         GameData.getInstance().setSize(getWidth(), getHeight());
         GameData.getInstance().addPropertyChangeListener(towerPanel);
 
