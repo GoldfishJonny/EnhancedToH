@@ -4,6 +4,11 @@ package com.team4;
 import org.json.JSONObject;
 
 import java.awt.event.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * The controller for the Towers of Hanoi game.
  * It implements MouseListener, MouseMotionListener, and ComponentListener to handle mouse events and resizing.
@@ -62,6 +67,21 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
                         LeaderBoardManager.getInstance().addTime(formattedTime);
                         //LeaderBoardManager.getInstance().notifyObservers(); //adds time to leaderboard when game ends
                         /// ^ Didnt work lmaoooo
+
+                        // DELETE FILES FOR PY SCRIPT
+                        Path path = Paths.get("nDisks.txt");
+                        try {
+                            boolean deleted = Files.deleteIfExists(path);
+                            if (deleted) {
+                                System.out.println("File deleted successfully");
+                            } else {
+                                System.out.println("File not found, not deleted");
+                            }
+                        } catch (IOException a) {
+                            System.out.println("An error occurred while trying to delete the file.");
+                            a.printStackTrace();
+                        }
+                        //
 
                         //When game is complete it updates the data.json file
                         JSONObject data = new JSONObject();

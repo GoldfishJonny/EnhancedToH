@@ -125,7 +125,22 @@ def visualize_tree(G, n, optimal_moves):
 
     plt.show()
 
-n = 3  # Number of disks
-G, all_moves = generate_all_moves(n)
-optimal_moves = hanoi_moves(n, 0, 2, 1)
-visualize_tree(G, n, optimal_moves)
+def read_n_disks_from_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            return int(file.read().strip())
+    except FileNotFoundError:
+        print("File not found. Using default value of 3.")
+        return 3
+    except ValueError:
+        print("Invalid number in file. Using default value of 3.")
+        return 3
+
+def main():
+    n = read_n_disks_from_file("nDisks.txt")
+    G, all_moves = generate_all_moves(n)
+    optimal_moves = hanoi_moves(n, 0, 2, 1)
+    visualize_tree(G, n, optimal_moves)
+
+if __name__ == "__main__":
+    main()

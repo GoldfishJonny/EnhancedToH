@@ -5,6 +5,8 @@ import com.team4.Scene;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class LevelButton extends JButton {
     public LevelButton(ImageIcon icon, int nDisks) {
@@ -14,6 +16,7 @@ public class LevelButton extends JButton {
         setFocusPainted(false);
         addActionListener(e -> {
             GameData.getInstance().setNDisks(nDisks);
+            writeDisksToFile(nDisks);  // Call the method to write to file
             if (GameData.getInstance().getMode() instanceof TimerMode) {
                 System.out.println("Timer Mode");
                 JPopupMenu popupMenu = new JPopupMenu();
@@ -24,5 +27,12 @@ public class LevelButton extends JButton {
                 GameData.getInstance().reloadScene(Scene.GAME);
             }
         });
+    }
+    private void writeDisksToFile(int nDisks) {
+        try (FileWriter writer = new FileWriter("nDisks.txt")) {
+            writer.write(Integer.toString(nDisks));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
