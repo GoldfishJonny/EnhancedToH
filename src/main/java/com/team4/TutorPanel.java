@@ -56,7 +56,7 @@ public class TutorPanel  extends JPanel implements PropertyChangeListener {
 
 
     private void runPythonScript() {
-        ProcessBuilder processBuilder = new ProcessBuilder("python3", "src/main/resources/help.py");
+        ProcessBuilder processBuilder = new ProcessBuilder("python3", "help.py");
         try {
             Process process = processBuilder.start();
             // Optionally handle the script's output here
