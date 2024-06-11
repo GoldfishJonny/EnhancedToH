@@ -440,4 +440,20 @@ public class GameData extends PropertyChangeSupport {
     public int getSelectedTime() {
         return selectedTime;
     }
+
+    public Tower findNearestTower(int mouseX) {
+        List<Tower> towers  = getTowers();
+        Tower nearestTower = null;
+        int minDistance = Integer.MAX_VALUE;
+
+        for (Tower tower : towers) {
+            int distance = Math.abs(tower.getX() - mouseX);
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestTower = tower;
+            }
+        }
+
+        return nearestTower;
+    }
 }

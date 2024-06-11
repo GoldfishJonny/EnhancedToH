@@ -15,6 +15,7 @@ public class LevelButton extends JButton {
         setBorderPainted(false);
         setFocusPainted(false);
         addActionListener(e -> {
+            System.out.println(nDisks);
             GameData.getInstance().setNDisks(nDisks);
             writeDisksToFile(nDisks);  // Call the method to write to file
             if (GameData.getInstance().getMode() instanceof TimerMode) {

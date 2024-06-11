@@ -45,9 +45,9 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
     public void mouseReleased(MouseEvent e) {
         boolean moved = false;
         if (GameData.getInstance().getSelectedDisk() != null) {
-
-            for (Tower tower : GameData.getInstance().getTowers()) {
-                if (tower.contains(e.getX(), e.getY()) && tower.canAddDisk(GameData.getInstance().getSelectedDisk())){
+            Tower tower = GameData.getInstance().findNearestTower(e.getX());
+//            for (Tower tower : GameData.getInstance().getTowers()) {
+                if (tower.canAddDisk(GameData.getInstance().getSelectedDisk())){
                     Tower oldTower = GameData.getInstance().getSelectedDisk().getTower();
                     oldTower.removeDisk(GameData.getInstance().getSelectedDisk());
                     tower.dropDisk(GameData.getInstance().getSelectedDisk());
@@ -106,14 +106,19 @@ public class GameController implements MouseListener, MouseMotionListener, Compo
             }
             GameData.getInstance().setSelectedDisk(null);
             GameData.getInstance().repaint();
-        }
+
     }
 
     public void mouseDragged(MouseEvent e) {
         if (GameData.getInstance().getSelectedDisk() != null) {
-            for (Tower tower : GameData.getInstance().getTowers()) {
-                tower.setSelected(tower.contains(e.getX(), e.getY()));
+            Tower tower = GameData.getInstance().findNearestTower(e.getX());
+            for (Tower t : GameData.getInstance().getTowers()) {
+                t.setSelected(false);
             }
+            tower.setSelected(true);
+//            for (Tower tower : GameData.getInstance().getTowers()) {
+////                tower.setSelected(tower.contains(e.getX(), e.getY()));
+//            }
             GameData.getInstance().getSelectedDisk().setDiskX(e.getX() - GameData.getInstance().getMouseXOffset());
             GameData.getInstance().getSelectedDisk().setDiskY(e.getY() - GameData.getInstance().getMouseYOffset());
             GameData.getInstance().repaint();

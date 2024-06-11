@@ -21,11 +21,10 @@ public class HelpPanel extends JPanel {
         // Add the image panel to the main panel
         add(imagePanel);
         JPanel textPanel = new JPanel(new BorderLayout());
-        JTextArea textArea = new JTextArea("""
-                Rules of Towers of Hanoi:- You can only move one disk at a time.
-                - Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack.
-                - You cannot place a larger disk onto a smaller disk.
-                - The objective is to move all disks from the first peg to the last peg, maintaining the order.""");
+        JTextArea textArea = new JTextArea(" Rules of Towers of Hanoi:- You can only move one disk at a time." + '\n' +
+                 "Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack." + '\n' +
+                 "You cannot place a larger disk onto a smaller disk." + '\n' +
+                 "The objective is to move all disks from the first peg to the last peg, maintaining the order.");
         textArea.setEditable(false);
         textArea.setWrapStyleWord(true);
         textArea.setLineWrap(true);

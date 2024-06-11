@@ -22,7 +22,6 @@ public class MenuScene extends JPanel {
         JPanel buttonPanel = createButtonPanel();
         add(buttonPanel, BorderLayout.SOUTH);
     }
-
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(); // Create a panel for buttons
         buttonPanel.setOpaque(false); // Make the button panel transparent
